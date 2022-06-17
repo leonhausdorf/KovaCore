@@ -1,0 +1,7 @@
+name: KovaCore
+version: 0.0.1
+description: Core Plugin of Kova
+author: Zevyx
+main: de.zevyx.kovacore.KovaCore
+commands:
+  kova:
