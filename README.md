@@ -1,7 +1,8 @@
 # KovaCore
+[![MavenBuildTest](https://github.com/leonhausdorf/KovaCore/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/leonhausdorf/KovaCore/actions/workflows/maven.yml)
 
+####
 KovaCore is the core plugin of the Kova project. It contains world management, coin api and some other useful commands for the Kova Project.
-
 ## Development
 
 > ❗ Important: This project is using the ``1.19 spigot build``
