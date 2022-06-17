@@ -1,5 +1,7 @@
 package de.zevyx.kovacore;
 
+import de.zevyx.kovacore.commands.GamemodeCommand;
+import de.zevyx.kovacore.commands.KovaCommand;
 import de.zevyx.kovacore.config.MessageConfig;
 import de.zevyx.kovacore.listener.ChatListener;
 import org.bukkit.Bukkit;
@@ -18,6 +20,9 @@ public class KovaCore extends JavaPlugin {
 
 
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
+
+        getCommand("kova").setExecutor(new KovaCommand());
+        getCommand("gamemode").setExecutor(new GamemodeCommand());
 
 
         messageConfig.init();

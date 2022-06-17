@@ -24,7 +24,7 @@ public class MessageConfig {
             try {
                 file.createNewFile();
 
-                config.set("prefix", "&8[&6KovaCore&8] &e» ");
+                config.set("prefix", "&6Kova &8» &7");
 
                 save();
             } catch (Exception e) {
@@ -41,8 +41,12 @@ public class MessageConfig {
         }
     }
 
+    public String getMessage(String key) {
+        return config.getString(key).replaceAll("&", "§");
+    }
+
     public String getPrefix() {
-        return config.getString("prefix");
+        return getMessage("prefix");
     }
 
 
