@@ -13,7 +13,13 @@ public class KovaCommand implements CommandExecutor {
         if(cmd.getName().equalsIgnoreCase("kova")) {
             if(cs instanceof Player) {
                 Player p = (Player) cs;
-                p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Hello World!");
+                if(args.length == 1) {
+                    if (args[0].equalsIgnoreCase("stats")) {
+                        if(p.hasPermission("kova.stats")) {
+
+                        }
+                    }
+                }
             } else {
                 cs.sendMessage("§cDu musst ein Spieler sein!");
             }
