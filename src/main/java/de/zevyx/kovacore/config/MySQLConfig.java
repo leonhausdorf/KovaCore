@@ -45,5 +45,25 @@ public class MySQLConfig {
         }
     }
 
+    public String getHost() {
+        return config.getString("host");
+    }
+
+    public String getPort() {
+        return config.getString("port");
+    }
+
+    public String getDatabase() {
+        return config.getString("database");
+    }
+
+    public String getUsername() {
+        return config.getString("username");
+    }
+
+    public String getPassword() {
+        return config.getString("password");
+    }
+
 
 }
