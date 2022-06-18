@@ -6,6 +6,7 @@ import de.zevyx.kovacore.commands.KovaCommand;
 import de.zevyx.kovacore.config.MessageConfig;
 import de.zevyx.kovacore.config.MySQLConfig;
 import de.zevyx.kovacore.listener.ChatListener;
+import de.zevyx.kovacore.manager.InventoryManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,11 +17,14 @@ public class KovaCore extends JavaPlugin {
     private MessageConfig messageConfig;
     private MySQLConfig mySQLConfig;
 
+    private InventoryManager inventoryManager;
+
     @Override
     public void onEnable() {
         instance = this;
         messageConfig = new MessageConfig();
         mySQLConfig = new MySQLConfig();
+        inventoryManager = new InventoryManager();
 
 
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
@@ -49,5 +53,9 @@ public class KovaCore extends JavaPlugin {
 
     public MySQLConfig getMySQLConfig() {
         return mySQLConfig;
+    }
+
+    public InventoryManager getInventoryManager() {
+        return inventoryManager;
     }
 }

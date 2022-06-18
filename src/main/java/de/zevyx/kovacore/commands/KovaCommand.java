@@ -16,7 +16,7 @@ public class KovaCommand implements CommandExecutor {
                 if(args.length == 1) {
                     if (args[0].equalsIgnoreCase("stats")) {
                         if(p.hasPermission("kova.stats")) {
-
+                            KovaCore.getInstance().getInventoryManager().openStatsInventory(p);
                         }
                     }
                 }

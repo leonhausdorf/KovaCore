@@ -54,7 +54,7 @@ public class InventoryAnimationAPI {
                 Object currentKey = items.keySet().toArray()[count];
 
                 inventory.setItem((Integer) currentKey, items.get(currentKey));
-                player.playSound(player.getLocation(), Sound.BLOCK_WOODEN_BUTTON_CLICK_ON, 1, 1);
+                player.playSound(player.getLocation(), Sound.BLOCK_WOODEN_BUTTON_CLICK_ON, 0.1f, 1);
 
                 if (count++ == maxSlot) {
                     this.cancel();
@@ -63,7 +63,7 @@ public class InventoryAnimationAPI {
 
             }
 
-        }.runTaskTimer(KovaCore.getInstance(), 4, 4);
+        }.runTaskTimer(KovaCore.getInstance(), 4, 2);
 
     }
 
