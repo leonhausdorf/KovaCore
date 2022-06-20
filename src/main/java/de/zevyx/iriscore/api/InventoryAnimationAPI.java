@@ -1,6 +1,6 @@
-package de.zevyx.kovacore.api;
+package de.zevyx.iriscore.api;
 
-import de.zevyx.kovacore.KovaCore;
+import de.zevyx.iriscore.IrisCore;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -63,7 +63,7 @@ public class InventoryAnimationAPI {
 
             }
 
-        }.runTaskTimer(KovaCore.getInstance(), 4, 2);
+        }.runTaskTimer(IrisCore.getInstance(), 4, 2);
 
     }
 

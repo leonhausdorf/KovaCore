@@ -1,6 +1,6 @@
-package de.zevyx.kovacore.api;
+package de.zevyx.iriscore.api;
 
-import de.zevyx.kovacore.KovaCore;
+import de.zevyx.iriscore.IrisCore;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ public class DatabaseAPI {
     public void connect() {
         if(!isConnected()) {
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://" + KovaCore.getInstance().getMySQLConfig().getHost() + ":" + KovaCore.getInstance().getMySQLConfig().getPort() + "/" + KovaCore.getInstance().getMySQLConfig().getDatabase(), KovaCore.getInstance().getMySQLConfig().getUsername(), KovaCore.getInstance().getMySQLConfig().getPassword());
+                connection = DriverManager.getConnection("jdbc:mysql://" + IrisCore.getInstance().getMySQLConfig().getHost() + ":" + IrisCore.getInstance().getMySQLConfig().getPort() + "/" + IrisCore.getInstance().getMySQLConfig().getDatabase(), IrisCore.getInstance().getMySQLConfig().getUsername(), IrisCore.getInstance().getMySQLConfig().getPassword());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

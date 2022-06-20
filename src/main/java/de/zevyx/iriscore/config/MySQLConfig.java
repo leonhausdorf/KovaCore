@@ -1,6 +1,6 @@
-package de.zevyx.kovacore.config;
+package de.zevyx.iriscore.config;
 
-import de.zevyx.kovacore.KovaCore;
+import de.zevyx.iriscore.IrisCore;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -11,13 +11,13 @@ public class MySQLConfig {
     private YamlConfiguration config;
 
     public MySQLConfig() {
-        this.file = new File("plugins/KovaCore/mysql.yml");
+        this.file = new File("plugins/IrisCore/mysql.yml");
         this.config = YamlConfiguration.loadConfiguration(file);
     }
 
     public void init() {
-        if (!KovaCore.getInstance().getDataFolder().exists()) {
-            KovaCore.getInstance().getDataFolder().mkdirs();
+        if (!IrisCore.getInstance().getDataFolder().exists()) {
+            IrisCore.getInstance().getDataFolder().mkdirs();
         }
 
         if (!file.exists()) {

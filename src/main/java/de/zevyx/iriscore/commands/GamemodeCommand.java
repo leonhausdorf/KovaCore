@@ -1,6 +1,6 @@
-package de.zevyx.kovacore.commands;
+package de.zevyx.iriscore.commands;
 
-import de.zevyx.kovacore.KovaCore;
+import de.zevyx.iriscore.IrisCore;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,18 +17,18 @@ public class GamemodeCommand implements CommandExecutor {
                     if(args.length == 1) {
                         if (args[0].equalsIgnoreCase("0")) {
                             p.setGameMode(org.bukkit.GameMode.SURVIVAL);
-                            p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Du bist nun im §eSurvival §7Spielmodus!");
+                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du bist nun im §eSurvival §7Spielmodus!");
                         } else if (args[0].equalsIgnoreCase("1")) {
                             p.setGameMode(org.bukkit.GameMode.CREATIVE);
-                            p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Du bist nun im §eCreative §7Spielmodus!");
+                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du bist nun im §eCreative §7Spielmodus!");
                         } else if (args[0].equalsIgnoreCase("2")) {
                             p.setGameMode(org.bukkit.GameMode.ADVENTURE);
-                            p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Du bist nun im §eAdventure §7Spielmodus!");
+                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du bist nun im §eAdventure §7Spielmodus!");
                         } else if (args[0].equalsIgnoreCase("3")) {
                             p.setGameMode(org.bukkit.GameMode.SPECTATOR);
-                            p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Du bist nun im §eSpectator §7Spielmodus!");
+                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du bist nun im §eSpectator §7Spielmodus!");
                         } else {
-                            p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Bitte benutze §e/gamemode <0|1|2|3>");
+                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Bitte benutze §e/gamemode <0|1|2|3>");
                         }
                     }
 
@@ -38,21 +38,21 @@ public class GamemodeCommand implements CommandExecutor {
                         if(t != null) {
                             if (args[0].equalsIgnoreCase("0")) {
                                 t.setGameMode(org.bukkit.GameMode.SURVIVAL);
-                                p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spielmodus §eSurvival für §e" + t.getName() + " §7gesetzt!");
+                                p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spielmodus §eSurvival für §e" + t.getName() + " §7gesetzt!");
                             } else if (args[0].equalsIgnoreCase("1")) {
                                 t.setGameMode(org.bukkit.GameMode.CREATIVE);
-                                p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spielmodus §eCreative für §e" + t.getName() + " §7gesetzt!");
+                                p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spielmodus §eCreative für §e" + t.getName() + " §7gesetzt!");
                             } else if (args[0].equalsIgnoreCase("2")) {
                                 t.setGameMode(org.bukkit.GameMode.ADVENTURE);
-                                p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spielmodus §eAdventure für §e" + t.getName() + " §7gesetzt!");
+                                p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spielmodus §eAdventure für §e" + t.getName() + " §7gesetzt!");
                             } else if (args[0].equalsIgnoreCase("3")) {
                                 t.setGameMode(org.bukkit.GameMode.SPECTATOR);
-                                p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spielmodus §eSpectator für §e" + t.getName() + " §7gesetzt!");
+                                p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spielmodus §eSpectator für §e" + t.getName() + " §7gesetzt!");
                             } else {
-                                p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Bitte benutze §e/gamemode <0|1|2|3>");
+                                p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Bitte benutze §e/gamemode <0|1|2|3>");
                             }
                         } else {
-                            p.sendMessage(KovaCore.getInstance().getMessageConfig().getPrefix() + "§7Der Spieler §e" + target + " §7ist nicht online!");
+                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Der Spieler §e" + target + " §7ist nicht online!");
                         }
                     }
                 }
