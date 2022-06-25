@@ -1,7 +1,14 @@
-name: KovaCore
-version: 0.0.1
+name: IrisCore
+version: 0.0.2
 description: Core Plugin of Kova
 author: Zevyx
-main: de.zevyx.kovacore.KovaCore
+api-version: 1.19
+main: de.zevyx.iriscore.IrisCore
 commands:
-  kova:
+  iris:
+  gamemode:
+    aliases:
+      - gm
+  world:
+    aliases:
+      - w
