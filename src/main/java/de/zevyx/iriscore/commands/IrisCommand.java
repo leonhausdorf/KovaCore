@@ -3,6 +3,7 @@ package de.zevyx.iriscore.commands;
 import de.zevyx.iriscore.IrisCore;
 import de.zevyx.iriscore.entities.ShopNPC;
 import de.zevyx.iriscore.entities.SpecialVex;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -48,27 +49,60 @@ public class IrisCommand implements CommandExecutor {
                             }
                         }
                     }
+                    if(args[0].equalsIgnoreCase("tpworld")) {
+                        if(p.hasPermission("kova.tpworld")) {
+                            if(Bukkit.getWorld(args[1]) != null) {
+                                p.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
+                                p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Du wurdest zur Welt §e" + args[1] + "§7 teleportiert!");
+                            } else {
+                                p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Diese Welt existiert nicht!");
+                            }
+                        } else {
+                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Du hast keine Berechtigung für diesen Befehl!");
+                        }
+                    }
                 }
 
-                if(args.length == 3) {
+                if(args.length == 4) {
 
-                    if (args[0].equalsIgnoreCase("register")) {
-                        if(p.hasPermission("kova.registerplayer")) {
-                            Player target = p.getServer().getPlayer(args[1]);
-                            Integer tribe = Integer.parseInt(args[2]);
-                            if(target != null) {
-                                if(!IrisCore.getInstance().getPlayerManager().isRegistered(target)) {
-                                    if(IrisCore.getInstance().getTribeManager().tribeExists(tribe)) {
-                                        IrisCore.getInstance().getPlayerManager().registerPlayer(target, Integer.parseInt(args[2]));
-                                        p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spieler §e" + target.getName() + " §7für den Tribe §e" + IrisCore.getInstance().getTribeManager().getTribeName(tribe) + " §7registriert!");
+                    if(args[0].equalsIgnoreCase("tribe")) {
+                        if (args[1].equalsIgnoreCase("register")) {
+                            if(p.hasPermission("iris.tribe")) {
+                                Player target = p.getServer().getPlayer(args[2]);
+                                Integer tribe = Integer.parseInt(args[3]);
+                                if(target != null) {
+                                    if(!IrisCore.getInstance().getPlayerManager().isRegistered(target)) {
+                                        if(IrisCore.getInstance().getTribeManager().tribeExists(tribe)) {
+                                            IrisCore.getInstance().getPlayerManager().registerPlayer(target, Integer.parseInt(args[3]));
+                                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spieler §e" + target.getName() + " §7für den Tribe §e" + IrisCore.getInstance().getTribeManager().getTribeName(tribe) + " §7registriert!");
+                                        } else {
+                                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§cDieser Tribe existiert nicht!");
+                                        }
                                     } else {
-                                        p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§cDieser Tribe existiert nicht!");
+                                        p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§cDieser Spieler ist bereits registriert!");
                                     }
                                 } else {
-                                    p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§cDieser Spieler ist bereits registriert!");
+                                    p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§cDer Spieler §e" + args[1] + " §cexistiert nicht!");
                                 }
-                            } else {
-                                p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§cDer Spieler §e" + args[1] + " §cexistiert nicht!");
+                            }
+                        }
+                        if(args[1].equalsIgnoreCase("change")) {
+                            if(p.hasPermission("iris.tribe")) {
+                                Player target = p.getServer().getPlayer(args[2]);
+                                Integer tribe = Integer.parseInt(args[3]);
+                                if(target != null) {
+                                    if(IrisCore.getInstance().getPlayerManager().isRegistered(target)) {
+                                        if(IrisCore.getInstance().getTribeManager().tribeExists(tribe)) {
+                                            IrisCore.getInstance().getPlayerManager().setTribe(target, Integer.parseInt(args[3]));
+                                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spieler §e" + target.getName() + " §7in den Tribe §e" + IrisCore.getInstance().getTribeManager().getTribeName(tribe) + " §7gesetzt!");
+                                        } else {
+                                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§cDieser Tribe existiert nicht!");
+                                        }
+                                    } else {
+                                        p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Dieser Spieler ist nicht registriert!");
+                                        p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Benutze §e/iris tribe register <Spieler> <Tribe> §7um ihn zu registrieren!");
+                                    }
+                                }
                             }
                         }
                     }

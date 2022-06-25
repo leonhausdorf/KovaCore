@@ -10,6 +10,8 @@ public class TribeScoreboard extends ScoreboardBuilder {
 
     public TribeScoreboard(Player player) {
         super(player, "  §8» §6§lIRIS §r§8«  ");
+
+        run();
     }
 
     @Override
@@ -17,7 +19,7 @@ public class TribeScoreboard extends ScoreboardBuilder {
         Integer tribeID = IrisCore.getInstance().getPlayerManager().getTribe(player);
 
         setScore(" ", 7);
-        setScore("§7Dein Tribe", 6);
+        setScore("§7Dein Tribe       ", 6);
         setScore("  §8» " + IrisCore.getInstance().getTribeManager().getTribeColor(tribeID) + IrisCore.getInstance().getTribeManager().getTribeName(tribeID), 5);
         setScore("  ", 4);
         setScore("§7Dukaten", 3);
@@ -28,10 +30,20 @@ public class TribeScoreboard extends ScoreboardBuilder {
 
     @Override
     public void update() {
-        Integer tribeID = IrisCore.getInstance().getPlayerManager().getTribe(player);
 
-        setScore("  §8» " + IrisCore.getInstance().getTribeManager().getTribeColor(tribeID) + IrisCore.getInstance().getTribeManager().getTribeName(tribeID), 5);
-        setScore("  §8» §e" + IrisAPI.getInstance().getDukatenAPI().getDukaten(player), 2);
+    }
+
+    private void run() {
+        new BukkitRunnable() {
+
+                public void run() {
+                    Integer tribeID = IrisCore.getInstance().getPlayerManager().getTribe(player);
+
+                    setScore("  §8» " + IrisCore.getInstance().getTribeManager().getTribeColor(tribeID) + IrisCore.getInstance().getTribeManager().getTribeName(tribeID), 5);
+                    setScore("  §8» §e" + IrisAPI.getInstance().getDukatenAPI().getDukaten(player), 2);
+                }
+
+            }.runTaskTimer(IrisCore.getInstance(), 20, 20 * 5);
     }
 
 }

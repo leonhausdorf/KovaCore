@@ -1,6 +1,7 @@
 package de.zevyx.iriscore.api;
 
 import de.zevyx.iriscore.IrisCore;
+import de.zevyx.iriscore.scoreboards.TribeScoreboard;
 import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;

@@ -1,11 +1,10 @@
 package de.zevyx.iriscore;
 
 import de.zevyx.iriscore.api.IrisAPI;
-import de.zevyx.iriscore.commands.GamemodeCommand;
-import de.zevyx.iriscore.commands.IrisCommand;
-import de.zevyx.iriscore.commands.IrisTabCompletion;
+import de.zevyx.iriscore.commands.*;
 import de.zevyx.iriscore.config.MessageConfig;
 import de.zevyx.iriscore.config.MySQLConfig;
+import de.zevyx.iriscore.config.WorldConfig;
 import de.zevyx.iriscore.entities.SpecialVex;
 import de.zevyx.iriscore.listener.*;
 import de.zevyx.iriscore.manager.*;
@@ -19,6 +18,7 @@ public class IrisCore extends JavaPlugin {
 
     private MessageConfig messageConfig;
     private MySQLConfig mySQLConfig;
+    private WorldConfig worldConfig;
 
     private InventoryManager inventoryManager;
     private PlayerManager playerManager;
@@ -26,6 +26,7 @@ public class IrisCore extends JavaPlugin {
     private EntityManager entityManager;
     private BackpackManager backpackManager;
     private CraftingManager craftingManager;
+    private WorldManager worldManager;
 
     private IrisAPI irisAPI;
 
@@ -38,13 +39,14 @@ public class IrisCore extends JavaPlugin {
         getAPI().getDatabaseAPI().connect();
 
         messageConfig = new MessageConfig();
+        worldConfig = new WorldConfig();
         inventoryManager = new InventoryManager();
         playerManager = new PlayerManager();
         tribeManager = new TribeManager();
         entityManager = new EntityManager();
         backpackManager = new BackpackManager();
         craftingManager = new CraftingManager();
-
+        worldManager = new WorldManager();
 
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new SpecialVex(), this);
@@ -53,13 +55,18 @@ public class IrisCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new InteractListener(), this);
         Bukkit.getPluginManager().registerEvents(new BuildListener(), this);
         Bukkit.getPluginManager().registerEvents(new DamageListener(), this);
+        Bukkit.getPluginManager().registerEvents(new CraftingManager(), this);
+        Bukkit.getPluginManager().registerEvents(new HologramManager(), this);
 
         getCommand("iris").setExecutor(new IrisCommand());
         getCommand("iris").setTabCompleter(new IrisTabCompletion());
         getCommand("gamemode").setExecutor(new GamemodeCommand());
+        getCommand("world").setExecutor(new WorldCommand());
+        getCommand("world").setTabCompleter(new WorldTabCompletion());
 
         messageConfig.init();
         mySQLConfig.init();
+        worldConfig.init();
 
         getCraftingManager().loadAllRecipes();
     }
@@ -79,6 +86,10 @@ public class IrisCore extends JavaPlugin {
 
     public MySQLConfig getMySQLConfig() {
         return mySQLConfig;
+    }
+
+    public WorldConfig getWorldConfig() {
+        return worldConfig;
     }
 
     public InventoryManager getInventoryManager() {
@@ -103,6 +114,10 @@ public class IrisCore extends JavaPlugin {
 
     public CraftingManager getCraftingManager() {
         return craftingManager;
+    }
+
+    public WorldManager getWorldManager() {
+        return worldManager;
     }
 
     public IrisAPI getAPI() {

@@ -9,3 +9,6 @@ commands:
   gamemode:
     aliases:
       - gm
+  world:
+    aliases:
+      - w

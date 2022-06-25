@@ -49,6 +49,18 @@ public class PlayerManager {
         return null;
     }
 
+    public void setTribe(Player p, Integer tribe) {
+        try {
+            PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("UPDATE `players` SET `tribeid` = ? WHERE `uuid` = ?");
+            ps.setInt(1, tribe);
+            ps.setString(2, p.getUniqueId().toString());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public List<String> getAllBackpacks() {
         try {
             PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("SELECT * FROM `players`");
