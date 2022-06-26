@@ -28,9 +28,9 @@ public class DamageListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e) {
-        if(e.getDamager() instanceof Player) {
-            Player p = (Player) e.getDamager();
-            if(e.getEntity() instanceof Player) {
+        if (e.getDamager() instanceof Player) {
+            Player damager = (Player) e.getDamager();
+            if (e.getEntity() instanceof Player) {
                 Player t = (Player) e.getEntity();
 
                 if (IrisCore.getInstance().getPlayerManager().getTribe(damager) == 5) {
@@ -62,6 +62,7 @@ public class DamageListener implements Listener {
 
         p.damage(calculateDamageApplied(originalDamage, points, toughness, resistance, epf));
     }
+
     public double calculateDamageApplied(double damage, double points, double toughness, int resistance, int epf) {
         double withArmorAndToughness = damage * (1 - Math.min(20, Math.max(points / 5, points - damage / (2 + toughness / 4))) / 25);
         double withResistance = withArmorAndToughness * (1 - (resistance * 0.2));

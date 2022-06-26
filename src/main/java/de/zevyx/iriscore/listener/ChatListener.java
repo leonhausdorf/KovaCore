@@ -19,7 +19,6 @@ public class ChatListener implements Listener {
                 tribePrefix = IrisCore.getInstance().getTribeManager().getTribePrefix(tribe);
             }
         }
-
         e.setFormat(tribePrefix + e.getPlayer().getDisplayName() + " §8» §7" + e.getMessage().replaceAll("&", "§"));
         IrisCore.getInstance().getCooldownManager().addCooldown(p.getUniqueId(), CooldownType.TEST);
         if(e.getMessage().equalsIgnoreCase("fuck")) {
