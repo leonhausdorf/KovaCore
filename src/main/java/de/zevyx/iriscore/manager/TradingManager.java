@@ -1,7 +1,4 @@
 package de.zevyx.iriscore.manager;
 
-public class EntityManager {
-
-
-
+public class TradingManager {
 }

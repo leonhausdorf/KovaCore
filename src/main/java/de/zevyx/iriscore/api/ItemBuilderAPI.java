@@ -7,6 +7,7 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Skull;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -85,6 +86,12 @@ public class ItemBuilderAPI {
     public ItemBuilderAPI setSkullOwner(String uuid) {
         SkullMeta im = (SkullMeta) is.getItemMeta();
         im.setOwningPlayer(Bukkit.getOfflinePlayer(UUID.fromString(uuid)));
+        is.setItemMeta(im);
+        return this;
+    }
+    public ItemBuilderAPI setSkullOwner(Player player) {
+        SkullMeta im = (SkullMeta) is.getItemMeta();
+        im.setOwningPlayer(player);
         is.setItemMeta(im);
         return this;
     }

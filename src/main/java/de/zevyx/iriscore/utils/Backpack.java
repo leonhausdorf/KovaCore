@@ -1,7 +1,11 @@
 package de.zevyx.iriscore.utils;
 
+import net.minecraft.world.item.Items;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BundleMeta;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -20,6 +24,10 @@ public class Backpack {
         this.uuid = uuid;
         this.inventory = Bukkit.createInventory(null, 9 * 3, "Backpack");
         this.inventory.setContents(Base64.itemStackArrayFromBase64(base64));
+
+        ItemStack bundle = new ItemStack(Material.BUNDLE);
+        BundleMeta bundleMeta = (BundleMeta) bundle.getItemMeta();
+
     }
 
     public UUID getUuid() {

@@ -6,11 +6,11 @@ public class IrisAPI {
 
     private DatabaseAPI databaseAPI;
     private DukatenAPI dukatenAPI;
+
     public IrisAPI() {
         instance = this;
         databaseAPI = new DatabaseAPI();
         dukatenAPI = new DukatenAPI();
-
     }
 
     public static IrisAPI getInstance() {
@@ -23,5 +23,9 @@ public class IrisAPI {
 
     public DukatenAPI getDukatenAPI() {
         return dukatenAPI;
+    }
+
+    public InventoryBuilder getInventoryBuilder() {
+        return new InventoryBuilder();
     }
 }

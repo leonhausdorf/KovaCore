@@ -1,6 +1,9 @@
 package de.zevyx.iriscore.listener;
 
 import de.zevyx.iriscore.IrisCore;
+import de.zevyx.iriscore.tribes.Tribes;
+import de.zevyx.iriscore.tribes.akarier.Akarier;
+import de.zevyx.iriscore.utils.CooldownType;
 import de.zevyx.iriscore.utils.Util;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -25,15 +28,23 @@ public class DamageListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent e) {
-        if(e.getDamager() instanceof Player) {
-            Player p = (Player) e.getDamager();
-            if(e.getEntity() instanceof Player) {
+        if (e.getDamager() instanceof Player) {
+            Player damager = (Player) e.getDamager();
+            if (e.getEntity() instanceof Player) {
                 Player t = (Player) e.getEntity();
 
-                if(IrisCore.getInstance().getPlayerManager().getTribe(p) == 2) {
-                    if(t.getInventory().getItemInOffHand().getType() == Material.SHIELD && e.getDamage(EntityDamageEvent.DamageModifier.BLOCKING) != 0) {
-                        if(Util.randomCalculation(20)) {
-                            reverseDamage(p, e.getDamage());
+                if (IrisCore.getInstance().getPlayerManager().getTribe(damager) == 5) {
+                    IrisCore.getInstance().getCooldownManager().addCooldown(damager.getUniqueId(), CooldownType.AKARIER_INVISIBILITY);
+                    if(Tribes.getAkarier().getInvisibilityManager().getInvisible().contains(damager) && damager.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
+                        damager.removePotionEffect(PotionEffectType.INVISIBILITY);
+                        Tribes.getAkarier().getInvisibilityManager().getInvisible().remove(damager);
+                    }
+                }
+
+                if (IrisCore.getInstance().getPlayerManager().getTribe(damager) == 2) {
+                    if (t.getInventory().getItemInOffHand().getType() == Material.SHIELD && e.getDamage(EntityDamageEvent.DamageModifier.BLOCKING) != 0) {
+                        if (Util.randomCalculation(20)) {
+                            reverseDamage(damager, e.getDamage());
                             e.setCancelled(true);
                         }
                     }
@@ -51,6 +62,7 @@ public class DamageListener implements Listener {
 
         p.damage(calculateDamageApplied(originalDamage, points, toughness, resistance, epf));
     }
+
     public double calculateDamageApplied(double damage, double points, double toughness, int resistance, int epf) {
         double withArmorAndToughness = damage * (1 - Math.min(20, Math.max(points / 5, points - damage / (2 + toughness / 4))) / 25);
         double withResistance = withArmorAndToughness * (1 - (resistance * 0.2));

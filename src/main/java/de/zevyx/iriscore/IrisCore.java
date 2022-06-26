@@ -9,6 +9,7 @@ import de.zevyx.iriscore.entities.SpecialVex;
 import de.zevyx.iriscore.listener.*;
 import de.zevyx.iriscore.manager.*;
 import de.zevyx.iriscore.utils.Backpack;
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,6 +28,8 @@ public class IrisCore extends JavaPlugin {
     private BackpackManager backpackManager;
     private CraftingManager craftingManager;
     private WorldManager worldManager;
+    @Getter
+    private CooldownManager cooldownManager;
 
     private IrisAPI irisAPI;
 
@@ -37,9 +40,9 @@ public class IrisCore extends JavaPlugin {
         mySQLConfig = new MySQLConfig();
 
         getAPI().getDatabaseAPI().connect();
-
         messageConfig = new MessageConfig();
         worldConfig = new WorldConfig();
+        cooldownManager = new CooldownManager();
         inventoryManager = new InventoryManager();
         playerManager = new PlayerManager();
         tribeManager = new TribeManager();
@@ -57,6 +60,7 @@ public class IrisCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new DamageListener(), this);
         Bukkit.getPluginManager().registerEvents(new CraftingManager(), this);
         Bukkit.getPluginManager().registerEvents(new HologramManager(), this);
+        Bukkit.getPluginManager().registerEvents(new MovementListener(), this);
 
         getCommand("iris").setExecutor(new IrisCommand());
         getCommand("iris").setTabCompleter(new IrisTabCompletion());
