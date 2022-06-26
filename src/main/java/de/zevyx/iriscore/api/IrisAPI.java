@@ -24,4 +24,8 @@ public class IrisAPI {
     public DukatenAPI getDukatenAPI() {
         return dukatenAPI;
     }
+
+    public InventoryBuilder getInventoryBuilder() {
+        return new InventoryBuilder();
+    }
 }

@@ -57,6 +57,7 @@ public class IrisCore extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new DamageListener(), this);
         Bukkit.getPluginManager().registerEvents(new CraftingManager(), this);
         Bukkit.getPluginManager().registerEvents(new HologramManager(), this);
+        Bukkit.getPluginManager().registerEvents(new MovementListener(), this);
 
         getCommand("iris").setExecutor(new IrisCommand());
         getCommand("iris").setTabCompleter(new IrisTabCompletion());

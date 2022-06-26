@@ -1,6 +1,9 @@
 package de.zevyx.iriscore.listener;
 
 import de.zevyx.iriscore.IrisCore;
+import de.zevyx.iriscore.tribes.Tribes;
+import de.zevyx.iriscore.tribes.akarier.Akarier;
+import de.zevyx.iriscore.utils.CooldownType;
 import de.zevyx.iriscore.utils.Util;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -30,10 +33,18 @@ public class DamageListener implements Listener {
             if(e.getEntity() instanceof Player) {
                 Player t = (Player) e.getEntity();
 
-                if(IrisCore.getInstance().getPlayerManager().getTribe(p) == 2) {
-                    if(t.getInventory().getItemInOffHand().getType() == Material.SHIELD && e.getDamage(EntityDamageEvent.DamageModifier.BLOCKING) != 0) {
-                        if(Util.randomCalculation(20)) {
-                            reverseDamage(p, e.getDamage());
+                if (IrisCore.getInstance().getPlayerManager().getTribe(damager) == 5) {
+                    IrisCore.getInstance().getCooldownManager().addCooldown(damager.getUniqueId(), CooldownType.AKARIER_INVISIBILITY);
+                    if(Tribes.getAkarier().getInvisibilityManager().getInvisible().contains(damager) && damager.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
+                        damager.removePotionEffect(PotionEffectType.INVISIBILITY);
+                        Tribes.getAkarier().getInvisibilityManager().getInvisible().remove(damager);
+                    }
+                }
+
+                if (IrisCore.getInstance().getPlayerManager().getTribe(damager) == 2) {
+                    if (t.getInventory().getItemInOffHand().getType() == Material.SHIELD && e.getDamage(EntityDamageEvent.DamageModifier.BLOCKING) != 0) {
+                        if (Util.randomCalculation(20)) {
+                            reverseDamage(damager, e.getDamage());
                             e.setCancelled(true);
                         }
                     }
