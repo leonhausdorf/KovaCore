@@ -98,7 +98,7 @@ public class InventoryManager {
 
         ItemStack upgrade = new ItemBuilderAPI(Material.BARRIER).setName("§8» §cKein Update verfügbar").build();
 
-        Integer level = IrisCore.getInstance().getPlayerManager().getBackpackLevel(p.getUniqueId().toString());
+        Integer level = IrisCore.getInstance().getBackpackManager().getBackpackLevel(p.getUniqueId().toString());
         Bukkit.broadcastMessage(level.toString());
 
         if (level == 1)

@@ -40,12 +40,10 @@ public class DamageListener implements Listener {
                     }
                 }
 
-                if (IrisCore.getInstance().getPlayerManager().getTribe(damager) == 2) {
+                if (IrisCore.getInstance().getPlayerManager().getTribe(t) == 2) {
                     if (t.getInventory().getItemInOffHand().getType() == Material.SHIELD && e.getDamage(EntityDamageEvent.DamageModifier.BLOCKING) != 0) {
-                        if (Util.randomCalculation(20)) {
                             reverseDamage(damager, e.getDamage());
                             e.setCancelled(true);
-                        }
                     }
                 }
             }

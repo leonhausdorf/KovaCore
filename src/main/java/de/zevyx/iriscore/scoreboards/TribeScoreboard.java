@@ -15,11 +15,18 @@ public class TribeScoreboard extends ScoreboardBuilder {
 
     @Override
     public void createScoreboard() {
-        Integer tribeID = IrisCore.getInstance().getPlayerManager().getTribe(player);
+        String tribe;
+        if(IrisCore.getInstance().getPlayerManager().getTribe(player) == 0) {
+            tribe = "§7Kein Tribe";
+        } else {
+            Integer tribeID = IrisCore.getInstance().getPlayerManager().getTribe(player);
+            tribe = IrisCore.getInstance().getTribeManager().getTribeColor(tribeID) + IrisCore.getInstance().getTribeManager().getTribeName(tribeID);
+        }
+
 
         setScore(" ", 7);
         setScore("§7Dein Tribe       ", 6);
-        setScore("  §8» " + IrisCore.getInstance().getTribeManager().getTribeColor(tribeID) + IrisCore.getInstance().getTribeManager().getTribeName(tribeID), 5);
+        setScore("  §8» " + tribe, 5);
         setScore("  ", 4);
         setScore("§7Dukaten", 3);
         setScore("  §8» §e" + IrisAPI.getInstance().getDukatenAPI().getDukaten(player), 2);

@@ -1,6 +1,7 @@
 package de.zevyx.iriscore.listener;
 
 import de.zevyx.iriscore.IrisCore;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -9,20 +10,43 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.inventory.meta.BundleMeta;
+
+import java.util.Arrays;
 
 public class InventoryListener implements Listener {
 
     @EventHandler
+    public void onClose(InventoryCloseEvent e) {
+        if(e.getView().getTitle().contains("Backpack")) {
+            if(e.getPlayer().getInventory().getItemInMainHand().getType() == Material.BUNDLE) {
+                BundleMeta bm = (BundleMeta) e.getPlayer().getInventory().getItemInMainHand().getItemMeta();
+                bm.setItems(Arrays.stream(e.getInventory().getContents()).toList());
+                e.getPlayer().getInventory().getItemInMainHand().setItemMeta(bm);
+            }
+
+            if(e.getPlayer().getInventory().getItemInOffHand().getType() == Material.BUNDLE) {
+                BundleMeta bm = (BundleMeta) e.getPlayer().getInventory().getItemInOffHand().getItemMeta();
+                bm.setItems(Arrays.stream(e.getInventory().getContents()).toList());
+                e.getPlayer().getInventory().getItemInOffHand().setItemMeta(bm);
+            }
+        }
+    }
+
+    @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
         try {
-            if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§8» §eBackpack") && (e.getClick().equals(ClickType.RIGHT) || e.getClick().equals(ClickType.CREATIVE))) {
-                e.setCancelled(true);
-                e.setResult(Event.Result.DENY);
-            } else if (e.getCursor() != null && e.getCursor().getItemMeta().getDisplayName().equals("§8» §eBackpack")
-                    && ((e.getAction().equals(InventoryAction.SWAP_WITH_CURSOR) && e.getClick().equals(ClickType.RIGHT))
-                    || (e.getAction().equals(InventoryAction.PLACE_ALL) && e.getClick().equals(ClickType.CREATIVE)))) {
-                e.setCancelled(true);
-                e.setResult(Event.Result.DENY);
+            if(e.getCurrentItem().hasItemMeta()) {
+                if (e.getCurrentItem().getItemMeta().getDisplayName().contains("§8» §eBackpack") && (e.getClick().equals(ClickType.RIGHT) || e.getClick().equals(ClickType.CREATIVE))) {
+                    e.setCancelled(true);
+                    e.setResult(Event.Result.DENY);
+                } else if (e.getCursor() != null && e.getCursor().hasItemMeta() && e.getCursor().getItemMeta().getDisplayName().contains("§8» §eBackpack")
+                        && ((e.getAction().equals(InventoryAction.SWAP_WITH_CURSOR) && e.getClick().equals(ClickType.RIGHT))
+                        || (e.getAction().equals(InventoryAction.PLACE_ALL) && e.getClick().equals(ClickType.CREATIVE)))) {
+                    e.setCancelled(true);
+                    e.setResult(Event.Result.DENY);
+                }
             }
             if (e.getView().getTitle().equals("§8Admin")) {
                 e.setCancelled(true);

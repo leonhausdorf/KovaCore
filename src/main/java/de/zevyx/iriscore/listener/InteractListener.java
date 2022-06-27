@@ -31,7 +31,7 @@ public class InteractListener implements Listener {
         try {
             if (e.getItem().hasItemMeta()) {
                 ItemMeta itemMeta = e.getItem().getItemMeta();
-                if (itemMeta.getDisplayName().equals("§8» §eBackpack")) {
+                if (itemMeta.getDisplayName().contains("§8» §eBackpack")) {
                     e.setCancelled(true);
                     List<String> lore = itemMeta.getLore();
                     if (lore.isEmpty()) {

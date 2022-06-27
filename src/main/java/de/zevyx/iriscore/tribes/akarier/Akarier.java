@@ -13,4 +13,8 @@ public class Akarier {
         return invisibilityManager;
     }
 
+    public CraftingManager getCraftingManager() {
+        return new CraftingManager();
+    }
+
 }

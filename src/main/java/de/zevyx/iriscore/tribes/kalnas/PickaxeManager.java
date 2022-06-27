@@ -22,6 +22,7 @@ public class PickaxeManager {
                 for (int i = 0; i < getFortuneOne(); i++) {
                     location.getWorld().dropItemNaturally(location, new ItemBuilderAPI(Material.IRON_INGOT).setAmount(1).build());
                 }
+                return;
             }
             if (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) == 2) {
                 location.getBlock().setType(Material.AIR);
@@ -30,6 +31,7 @@ public class PickaxeManager {
                 for (int i = 0; i < getFortuneTwo(); i++) {
                     location.getWorld().dropItemNaturally(location, new ItemBuilderAPI(Material.IRON_INGOT).setAmount(1).build());
                 }
+                return;
             }
             if (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) == 3) {
                 location.getBlock().setType(Material.AIR);
@@ -38,7 +40,46 @@ public class PickaxeManager {
                 for (int i = 0; i < getFortuneThree(); i++) {
                     location.getWorld().dropItemNaturally(location, new ItemBuilderAPI(Material.IRON_INGOT).setAmount(1).build());
                 }
+                return;
             }
+
+            location.getWorld().dropItemNaturally(location, new ItemBuilderAPI(Material.IRON_INGOT).setAmount(1).build());
+            location.getWorld().playEffect(location, Effect.MOBSPAWNER_FLAMES, 0);
+            location.getBlock().setType(Material.AIR);
+        }
+
+        if (location.getBlock().getType() == Material.GOLD_ORE) {
+            if (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) == 1) {
+                location.getBlock().setType(Material.AIR);
+                location.getWorld().playEffect(location, Effect.MOBSPAWNER_FLAMES, 0);
+                p.getInventory().getItemInMainHand().setDurability((short) (p.getInventory().getItemInMainHand().getDurability() + 1));
+                for (int i = 0; i < getFortuneOne(); i++) {
+                    location.getWorld().dropItemNaturally(location, new ItemBuilderAPI(Material.GOLD_INGOT).setAmount(1).build());
+                }
+                return;
+            }
+            if (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) == 2) {
+                location.getBlock().setType(Material.AIR);
+                location.getWorld().playEffect(location, Effect.MOBSPAWNER_FLAMES, 0);
+                p.getInventory().getItemInMainHand().setDurability((short) (p.getInventory().getItemInMainHand().getDurability() + 1));
+                for (int i = 0; i < getFortuneTwo(); i++) {
+                    location.getWorld().dropItemNaturally(location, new ItemBuilderAPI(Material.GOLD_INGOT).setAmount(1).build());
+                }
+                return;
+            }
+            if (p.getInventory().getItemInMainHand().getItemMeta().getEnchantLevel(Enchantment.LOOT_BONUS_BLOCKS) == 3) {
+                location.getBlock().setType(Material.AIR);
+                location.getWorld().playEffect(location, Effect.MOBSPAWNER_FLAMES, 0);
+                p.getInventory().getItemInMainHand().setDurability((short) (p.getInventory().getItemInMainHand().getDurability() + 1));
+                for (int i = 0; i < getFortuneThree(); i++) {
+                    location.getWorld().dropItemNaturally(location, new ItemBuilderAPI(Material.GOLD_INGOT).setAmount(1).build());
+                }
+                return;
+            }
+
+            location.getWorld().dropItemNaturally(location, new ItemBuilderAPI(Material.GOLD_INGOT).setAmount(1).build());
+            location.getWorld().playEffect(location, Effect.MOBSPAWNER_FLAMES, 0);
+            location.getBlock().setType(Material.AIR);
         }
 
 

@@ -14,14 +14,14 @@ public class Backpack {
     private final UUID uuid;
     private final Inventory inventory;
 
-    public Backpack(UUID uuid) {
+    public Backpack(UUID uuid, Integer level) {
         this.uuid = uuid;
-        this.inventory = Bukkit.createInventory(null, 9 * 3, "Backpack");
+        this.inventory = Bukkit.createInventory(null, 9 * level, "Backpack");
     }
 
-    public Backpack(UUID uuid, String base64) throws IOException {
+    public Backpack(UUID uuid, String base64, Integer level) throws IOException {
         this.uuid = uuid;
-        this.inventory = Bukkit.createInventory(null, 9 * 3, "Backpack");
+        this.inventory = Bukkit.createInventory(null, 9 * level, "Backpack");
         this.inventory.setContents(Base64.itemStackArrayFromBase64(base64));
 
         ItemStack bundle = new ItemStack(Material.BUNDLE);

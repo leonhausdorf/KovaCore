@@ -105,7 +105,9 @@ public class CooldownManager {
         for (CooldownType type : cooldowns.keySet()) {
             Long timeOut = cooldowns.get(type);
             if (timeOut >= System.currentTimeMillis()) {
-                active = true;
+                if(type == cooldownType) {
+                    active = true;
+                }
             }
         }
         return active;

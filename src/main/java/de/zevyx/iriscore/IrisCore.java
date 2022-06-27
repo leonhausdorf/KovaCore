@@ -8,6 +8,7 @@ import de.zevyx.iriscore.config.WorldConfig;
 import de.zevyx.iriscore.entities.SpecialVex;
 import de.zevyx.iriscore.listener.*;
 import de.zevyx.iriscore.manager.*;
+import de.zevyx.iriscore.tribes.Tribes;
 import de.zevyx.iriscore.utils.CustomEnchant;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -67,14 +68,17 @@ public class IrisCore extends JavaPlugin {
 
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new SpecialVex(), this);
+        Bukkit.getPluginManager().registerEvents(new HologramManager(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
         Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new InteractListener(), this);
         Bukkit.getPluginManager().registerEvents(new BuildListener(), this);
         Bukkit.getPluginManager().registerEvents(new DamageListener(), this);
         Bukkit.getPluginManager().registerEvents(new CraftingManager(), this);
-        Bukkit.getPluginManager().registerEvents(new HologramManager(), this);
         Bukkit.getPluginManager().registerEvents(new MovementListener(), this);
+
+        Bukkit.getPluginManager().registerEvents(new de.zevyx.iriscore.tribes.kalnas.CraftingManager(), this);
+        Bukkit.getPluginManager().registerEvents(new de.zevyx.iriscore.tribes.akarier.CraftingManager(), this);
 
         getCommand("iris").setExecutor(new IrisCommand());
         getCommand("iris").setTabCompleter(new IrisTabCompletion());
@@ -92,6 +96,8 @@ public class IrisCore extends JavaPlugin {
         worldConfig.init();
 
         getCraftingManager().loadAllRecipes();
+        Tribes.getKalnas().getCraftingManager().registerCrafting();
+        Tribes.getAkarier().getCraftingManager().registerCrafting();
 
         CustomEnchant.register();
     }

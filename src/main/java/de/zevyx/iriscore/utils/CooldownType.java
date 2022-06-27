@@ -5,14 +5,16 @@ import org.bukkit.Sound;
 
 public enum CooldownType {
 
-    AKARIER_INVISIBILITY("Invisibility", 60, true, Sound.BLOCK_NOTE_BLOCK_BIT),
-    VEX("Vex", 30, true, Sound.BLOCK_NOTE_BLOCK_BIT),
+    AKARIER_INVISIBILITY("Invisibility", 60, true, Sound.UI_TOAST_IN),
+    DOUBLEJUMP("Double Jump", 10, true, Sound.UI_TOAST_IN),
 
-    TEST("TestType", 30, true, Sound.BLOCK_NOTE_BLOCK_BIT),
-    TEST2("TestType2", 40, true, Sound.BLOCK_NOTE_BLOCK_BIT),
-    TEST3("TestType3", 20, true, Sound.BLOCK_NOTE_BLOCK_BIT),
-    TEST4("TestType4", 20, true, Sound.BLOCK_NOTE_BLOCK_BIT),
-    TEST5("TestType5", 20, true, Sound.BLOCK_NOTE_BLOCK_BIT),
+    VEX("Vex", 29, true, Sound.UI_TOAST_IN),
+
+    TEST("TestType", 30, true, Sound.UI_TOAST_IN),
+    TEST2("TestType2", 40, true, Sound.UI_TOAST_IN),
+    TEST3("TestType3", 20, true, Sound.UI_TOAST_IN),
+    TEST4("TestType4", 20, true, Sound.UI_TOAST_IN),
+    TEST5("TestType5", 20, true, Sound.UI_TOAST_IN),
 
     ;
 

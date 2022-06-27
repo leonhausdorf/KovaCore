@@ -10,7 +10,7 @@ public class Kalnas {
         pickaxeManager = new PickaxeManager();
     }
 
-    public CraftingManager getInvisibilityManager() {
+    public CraftingManager getCraftingManager() {
         return craftingManager;
     }
 

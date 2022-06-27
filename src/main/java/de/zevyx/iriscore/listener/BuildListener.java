@@ -2,6 +2,7 @@ package de.zevyx.iriscore.listener;
 
 import de.zevyx.iriscore.IrisCore;
 import de.zevyx.iriscore.tribes.Tribes;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

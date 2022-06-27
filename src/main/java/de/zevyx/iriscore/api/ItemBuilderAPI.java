@@ -73,6 +73,13 @@ public class ItemBuilderAPI {
         return this;
     }
 
+    public ItemBuilderAPI unsafeEnchantItem(Enchantment enchantment, Integer level) {
+        ItemMeta im = is.getItemMeta();
+        im.addEnchant(enchantment, level, true);
+        is.setItemMeta(im);
+        return this;
+    }
+
     public ItemStack build() {
         return is;
     }
