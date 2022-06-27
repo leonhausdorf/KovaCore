@@ -14,6 +14,16 @@ public class Trading {
         this.player = player;
         this.target = target;
         playerInventory = IrisAPI.getInstance().getInventoryBuilder().name("§6§lHandel §7mit §e" + target.getName())
+                .line(0, InventoryBuilder.getClearMaterial(Material.GRAY_STAINED_GLASS_PANE))
+                .line(4, InventoryBuilder.getClearMaterial(Material.GRAY_STAINED_GLASS_PANE))
+                .verticalLine(0, InventoryBuilder.getClearMaterial(Material.GRAY_STAINED_GLASS_PANE))
+                .verticalLine(8, InventoryBuilder.getClearMaterial(Material.GRAY_STAINED_GLASS_PANE))
+                .verticalLine(4, InventoryBuilder.getClearMaterial(Material.IRON_BARS))
+                .item(18, new ItemBuilderAPI(Material.PLAYER_HEAD).setSkullOwner(player).build())
+                .item(26, new ItemBuilderAPI(Material.PLAYER_HEAD).setSkullOwner(target).build())
+                .item(26, InventoryBuilder.getClearMaterial(Material.GRAY_STAINED_GLASS_PANE))
+                .item(39, InventoryBuilder.getClearMaterial(Material.YELLOW_STAINED_GLASS_PANE))
+                .item(41, InventoryBuilder.getClearMaterial(Material.YELLOW_STAINED_GLASS_PANE))
                 .build();
         targetInventory = IrisAPI.getInstance().getInventoryBuilder().name("§6§lHandel §7mit §e" + player.getName())
                 .line(0, InventoryBuilder.getClearMaterial(Material.GRAY_STAINED_GLASS_PANE))
@@ -24,6 +34,8 @@ public class Trading {
                 .item(18, new ItemBuilderAPI(Material.PLAYER_HEAD).setSkullOwner(target).build())
                 .item(26, new ItemBuilderAPI(Material.PLAYER_HEAD).setSkullOwner(player).build())
                 .item(26, InventoryBuilder.getClearMaterial(Material.GRAY_STAINED_GLASS_PANE))
+                .item(39, InventoryBuilder.getClearMaterial(Material.YELLOW_STAINED_GLASS_PANE))
+                .item(41, InventoryBuilder.getClearMaterial(Material.YELLOW_STAINED_GLASS_PANE))
                 .build();
     }
 

@@ -66,8 +66,12 @@ public class IrisCore extends JavaPlugin {
         getCommand("iris").setExecutor(new IrisCommand());
         getCommand("iris").setTabCompleter(new IrisTabCompletion());
         getCommand("gamemode").setExecutor(new GamemodeCommand());
+        getCommand("gamemode").setTabCompleter(new GamemodeCommand());
         getCommand("world").setExecutor(new WorldCommand());
         getCommand("world").setTabCompleter(new WorldTabCompletion());
+        getCommand("heal").setExecutor(new HealCommand());
+        getCommand("invsee").setExecutor(new InvseeCommand());
+        getCommand("enderchest").setExecutor(new EnderchestCommand());
 
         messageConfig.init();
         mySQLConfig.init();

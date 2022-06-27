@@ -11,6 +11,8 @@ public enum CooldownType {
     TEST("TestType", 30, true, Sound.BLOCK_NOTE_BLOCK_BIT),
     TEST2("TestType2", 40, true, Sound.BLOCK_NOTE_BLOCK_BIT),
     TEST3("TestType3", 20, true, Sound.BLOCK_NOTE_BLOCK_BIT),
+    TEST4("TestType4", 20, true, Sound.BLOCK_NOTE_BLOCK_BIT),
+    TEST5("TestType5", 20, true, Sound.BLOCK_NOTE_BLOCK_BIT),
 
     ;
 

@@ -12,3 +12,8 @@ commands:
   world:
     aliases:
       - w
+  heal:
+  invsee:
+  enderchest:
+    aliases:
+      - ec
