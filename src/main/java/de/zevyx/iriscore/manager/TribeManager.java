@@ -1,7 +1,6 @@
 package de.zevyx.iriscore.manager;
 
 import de.zevyx.iriscore.IrisCore;
-import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +27,7 @@ public class TribeManager {
 
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return rs.getString("name");
             }
         } catch (SQLException e) {
@@ -44,7 +43,7 @@ public class TribeManager {
 
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return rs.getString("color") + getTribeName(tribeID) + " §8| §" + rs.getString("color");
             }
         } catch (SQLException e) {
@@ -60,7 +59,7 @@ public class TribeManager {
 
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return rs.getString("color");
             }
         } catch (SQLException e) {
@@ -76,7 +75,7 @@ public class TribeManager {
 
             ResultSet rs = ps.executeQuery();
             ArrayList<String> players = new ArrayList<>();
-            while(rs.next()) {
+            while (rs.next()) {
                 players.add(rs.getString("uuid"));
             }
             return players;

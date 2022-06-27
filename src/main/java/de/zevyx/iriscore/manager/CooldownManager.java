@@ -1,18 +1,14 @@
 package de.zevyx.iriscore.manager;
 
-import com.sun.jna.platform.unix.solaris.LibKstat;
 import de.zevyx.iriscore.IrisCore;
 import de.zevyx.iriscore.utils.CooldownType;
-import lombok.NoArgsConstructor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class CooldownManager {
@@ -40,7 +36,7 @@ public class CooldownManager {
 
                     String message = "";
                     for (CooldownType cooldownType : cooldowns.keySet()) {
-                        if(!cooldownType.isShown()){
+                        if (!cooldownType.isShown()) {
                             continue;
                         }
                         double endTime = cooldowns.get(cooldownType); // 120
@@ -73,7 +69,7 @@ public class CooldownManager {
                         Long timeOut = cooldowns.get(type);
                         if (timeOut <= System.currentTimeMillis()) {
                             cooldowns.remove(type);
-                            if(type.getFinishSound() != null){
+                            if (type.getFinishSound() != null) {
                                 player.playSound(player.getLocation(), type.getFinishSound(), 10, 1);
                             }
                             continue;

@@ -5,7 +5,6 @@ import org.bukkit.enchantments.Enchantment;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class CustomEnchant {
 
@@ -14,18 +13,18 @@ public class CustomEnchant {
     public static void register() {
         boolean registered = Arrays.stream(Enchantment.values()).toList().contains(AUTOSMELT);
 
-        if(!registered)
+        if (!registered)
             registerEnchantment(AUTOSMELT);
     }
 
     public static void registerEnchantment(Enchantment enchantment) {
-        boolean registered = true;
+        boolean registered = Arrays.stream(Enchantment.values()).toList().contains(enchantment);
         try {
             Field f = Enchantment.class.getDeclaredField("acceptingNew");
             f.setAccessible(true);
             f.set(null, true);
             Enchantment.registerEnchantment(enchantment);
-        } catch(Exception e) {
+        } catch (Exception e) {
             registered = false;
             e.printStackTrace();
         }

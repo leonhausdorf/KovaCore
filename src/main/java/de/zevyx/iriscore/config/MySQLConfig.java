@@ -7,8 +7,8 @@ import java.io.File;
 
 public class MySQLConfig {
 
-    private File file;
-    private YamlConfiguration config;
+    private final File file;
+    private final YamlConfiguration config;
 
     public MySQLConfig() {
         this.file = new File("plugins/IrisCore/mysql.yml");

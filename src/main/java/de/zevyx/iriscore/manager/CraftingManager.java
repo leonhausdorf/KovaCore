@@ -15,9 +15,8 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
 
-import javax.naming.Name;
+import java.util.UUID;
 
 public class CraftingManager implements Listener {
 
@@ -31,10 +30,11 @@ public class CraftingManager implements Listener {
     }
 
     private void addBackpackTier1() {
-        ItemStack backpack = new ItemStack(Material.BROWN_SHULKER_BOX);
-        ItemMeta meta = backpack.getItemMeta();
-        meta.setDisplayName("§8» §eBackpack");
-        backpack.setItemMeta(meta);
+
+        ItemStack backpack = new ItemBuilderAPI(Material.BUNDLE)
+                .setName("§8» §eBackpack")
+                .setLore("§8BackpackID: " + UUID.randomUUID())
+                .build();
 
         NamespacedKey key = new NamespacedKey(IrisCore.getInstance(), "backpack_tier1");
         ShapedRecipe recipe = new ShapedRecipe(key, backpack);
@@ -108,25 +108,25 @@ public class CraftingManager implements Listener {
 
     @EventHandler
     public void onCraft(PrepareItemCraftEvent e) {
-        if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eSense §7(§eTier 2§7)")) {
+        if (e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eSense §7(§eTier 2§7)")) {
             ItemStack hoe = e.getInventory().getMatrix()[4];
-            if(hoe.getItemMeta() == null || !hoe.getItemMeta().getDisplayName().equals("§8» §eSense §7(§eTier 1§7)")) {
+            if (hoe.getItemMeta() == null || !hoe.getItemMeta().getDisplayName().equals("§8» §eSense §7(§eTier 1§7)")) {
                 e.getInventory().setResult(new ItemStack(Material.AIR));
             }
         }
 
-        if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eSense §7(§eTier 3§7)")) {
+        if (e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eSense §7(§eTier 3§7)")) {
             ItemStack[] rc = e.getInventory().getMatrix();
-            if(!rc[4].hasItemMeta() || !rc[4].getItemMeta().getDisplayName().equals("§8» §eSense §7(§eTier 2§7)")) {
+            if (!rc[4].hasItemMeta() || !rc[4].getItemMeta().getDisplayName().equals("§8» §eSense §7(§eTier 2§7)")) {
                 e.getInventory().setResult(new ItemStack(Material.AIR));
             }
-            if((!rc[0].hasItemMeta() || !rc[0].getItemMeta().getDisplayName().contains("Bonemeal Infused Iron")) && rc[0].getItemMeta().getEnchantLevel(Enchantment.OXYGEN) == 1) {
+            if ((!rc[0].hasItemMeta() || !rc[0].getItemMeta().getDisplayName().contains("Bonemeal Infused Iron")) && rc[0].getItemMeta().getEnchantLevel(Enchantment.OXYGEN) == 1) {
                 e.getInventory().setResult(new ItemStack(Material.AIR));
             }
-            if((!rc[1].hasItemMeta() || !rc[1].getItemMeta().getDisplayName().contains("Bonemeal Infused Iron")) && rc[0].getItemMeta().getEnchantLevel(Enchantment.OXYGEN) == 1) {
+            if ((!rc[1].hasItemMeta() || !rc[1].getItemMeta().getDisplayName().contains("Bonemeal Infused Iron")) && rc[0].getItemMeta().getEnchantLevel(Enchantment.OXYGEN) == 1) {
                 e.getInventory().setResult(new ItemStack(Material.AIR));
             }
-            if((!rc[2].hasItemMeta() || !rc[2].getItemMeta().getDisplayName().contains("Bonemeal Infused Iron")) && rc[0].getItemMeta().getEnchantLevel(Enchantment.OXYGEN) == 1) {
+            if ((!rc[2].hasItemMeta() || !rc[2].getItemMeta().getDisplayName().contains("Bonemeal Infused Iron")) && rc[0].getItemMeta().getEnchantLevel(Enchantment.OXYGEN) == 1) {
                 e.getInventory().setResult(new ItemStack(Material.AIR));
             }
         }
@@ -135,9 +135,9 @@ public class CraftingManager implements Listener {
     @EventHandler
     public void onCraft(CraftItemEvent e) {
         Player p = (Player) e.getWhoClicked();
-        if(e.getRecipe().getResult().hasItemMeta()) {
-            if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eSense §7(§eTier 1§7)")) {
-                if(IrisCore.getInstance().getPlayerManager().getTribe(p) != 3) {
+        if (e.getRecipe().getResult().hasItemMeta()) {
+            if (e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eSense §7(§eTier 1§7)")) {
+                if (IrisCore.getInstance().getPlayerManager().getTribe(p) != 3) {
                     p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Das können nur §e" + IrisCore.getInstance().getTribeManager().getTribeName(3) + " §7herstellen");
                     p.playSound(p.getLocation(), Sound.BLOCK_CHAIN_HIT, 1, 1);
                     p.closeInventory();
@@ -145,8 +145,8 @@ public class CraftingManager implements Listener {
                 }
             }
 
-            if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eSense §7(§eTier 2§7)")) {
-                if(IrisCore.getInstance().getPlayerManager().getTribe(p) != 3) {
+            if (e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eSense §7(§eTier 2§7)")) {
+                if (IrisCore.getInstance().getPlayerManager().getTribe(p) != 3) {
                     p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Das können nur §e" + IrisCore.getInstance().getTribeManager().getTribeName(3) + " §7herstellen");
                     p.playSound(p.getLocation(), Sound.BLOCK_CHAIN_HIT, 1, 1);
                     p.closeInventory();
@@ -154,8 +154,8 @@ public class CraftingManager implements Listener {
                 }
             }
 
-            if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eSense §7(§eTier 3§7)")) {
-                if(IrisCore.getInstance().getPlayerManager().getTribe(p) != 3) {
+            if (e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eSense §7(§eTier 3§7)")) {
+                if (IrisCore.getInstance().getPlayerManager().getTribe(p) != 3) {
                     p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Das können nur §e" + IrisCore.getInstance().getTribeManager().getTribeName(3) + " §7herstellen");
                     p.playSound(p.getLocation(), Sound.BLOCK_CHAIN_HIT, 1, 1);
                     p.closeInventory();
@@ -163,8 +163,8 @@ public class CraftingManager implements Listener {
                 }
             }
 
-            if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("Bonemeal Infused Iron")) {
-                if(IrisCore.getInstance().getPlayerManager().getTribe(p) != 3) {
+            if (e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("Bonemeal Infused Iron")) {
+                if (IrisCore.getInstance().getPlayerManager().getTribe(p) != 3) {
                     p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Das können nur §e" + IrisCore.getInstance().getTribeManager().getTribeName(3) + " §7herstellen");
                     p.playSound(p.getLocation(), Sound.BLOCK_CHAIN_HIT, 1, 1);
                     p.closeInventory();

@@ -4,9 +4,10 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import de.zevyx.iriscore.IrisCore;
 import net.minecraft.core.BlockPosition;
-import net.minecraft.network.protocol.game.*;
-import net.minecraft.network.syncher.DataWatcher;
-import net.minecraft.network.syncher.DataWatcherRegistry;
+import net.minecraft.network.protocol.game.PacketPlayOutEntity;
+import net.minecraft.network.protocol.game.PacketPlayOutNamedEntitySpawn;
+import net.minecraft.network.protocol.game.PacketPlayOutPlayerInfo;
+import net.minecraft.network.protocol.game.PacketPlayOutScoreboardTeam;
 import net.minecraft.server.level.EntityPlayer;
 import net.minecraft.server.network.PlayerConnection;
 import net.minecraft.world.entity.EntityPose;
@@ -39,7 +40,7 @@ public class CorpseEntity {
         corpse.e(new BlockPosition(bed.getX(), bed.getY(), bed.getZ()));
 
         ScoreboardTeam team = new ScoreboardTeam(
-                ((CraftScoreboard)Bukkit.getScoreboardManager().getMainScoreboard()).getHandle(), player.getName());
+                ((CraftScoreboard) Bukkit.getScoreboardManager().getMainScoreboard()).getHandle(), player.getName());
         team.a(ScoreboardTeamBase.EnumNameTagVisibility.b);
 
         PacketPlayOutScoreboardTeam score1 = PacketPlayOutScoreboardTeam.a(team);
@@ -54,7 +55,7 @@ public class CorpseEntity {
 
         PacketPlayOutEntity.PacketPlayOutRelEntityMove move = new PacketPlayOutEntity.PacketPlayOutRelEntityMove(corpse.getBukkitEntity().getEntityId(), (byte) 0, (byte) ((player.getLocation().getY() - 1.7 - player.getLocation().getY()) * 32), (byte) 0, false);
 
-        for(Player all : Bukkit.getOnlinePlayers()) {
+        for (Player all : Bukkit.getOnlinePlayers()) {
             PlayerConnection connection = ((CraftPlayer) all).getHandle().b;
             connection.a(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.a, corpse));
             connection.a(new PacketPlayOutNamedEntitySpawn(corpse));

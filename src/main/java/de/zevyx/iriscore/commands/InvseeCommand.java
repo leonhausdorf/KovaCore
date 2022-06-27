@@ -27,7 +27,7 @@ public class InvseeCommand implements CommandExecutor {
                 p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Dazu hast du keine Rechte!");
             }
         } else {
-            sender.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix()+ "Dazu musst du ein Spieler sein");
+            sender.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Dazu musst du ein Spieler sein");
         }
         return false;
     }

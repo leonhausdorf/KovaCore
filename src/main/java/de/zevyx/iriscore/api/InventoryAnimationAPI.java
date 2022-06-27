@@ -12,9 +12,9 @@ import java.util.HashMap;
 public class InventoryAnimationAPI {
 
     private final HashMap<Integer, ItemStack> items = new HashMap<>();
-    private Inventory inventory;
-    private Player player;
-    private ItemStack idleItem;
+    private final Inventory inventory;
+    private final Player player;
+    private final ItemStack idleItem;
 
     public InventoryAnimationAPI(Inventory inventory, Player player, ItemStack idleItem) {
         this.inventory = inventory;
@@ -36,7 +36,7 @@ public class InventoryAnimationAPI {
         Integer maxSlot = items.size();
 
 
-        for(int i = 0; i < inventorySize; i++) {
+        for (int i = 0; i < inventorySize; i++) {
             inventory.setItem(i, idleItem);
         }
 

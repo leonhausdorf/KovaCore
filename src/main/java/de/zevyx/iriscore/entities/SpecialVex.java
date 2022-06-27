@@ -3,9 +3,7 @@ package de.zevyx.iriscore.entities;
 import de.zevyx.iriscore.IrisCore;
 import de.zevyx.iriscore.utils.CooldownType;
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
 import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.attribute.Attributable;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
@@ -27,7 +25,7 @@ public class SpecialVex implements Listener {
         Vex vex = loc.getWorld().spawn(loc.add(0, 2, 0), Vex.class);
         vex.setCustomName(tribe.toString());
         vex.setCustomNameVisible(false);
-        Attributable attributable = (Attributable) vex;
+        Attributable attributable = vex;
         AttributeInstance attributeInstance = attributable.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH);
         attributeInstance.setBaseValue(20);
         vex.setHealth(20);
@@ -35,9 +33,9 @@ public class SpecialVex implements Listener {
         IrisCore.getInstance().getCooldownManager().addCooldown(p.getUniqueId(), CooldownType.VEX);
 
         ArrayList<Player> targets = new ArrayList<>();
-        for(Player all : Bukkit.getOnlinePlayers()) {
-            if(IrisCore.getInstance().getPlayerManager().isRegistered(all)) {
-                if(IrisCore.getInstance().getPlayerManager().getTribe(all) != tribe) {
+        for (Player all : Bukkit.getOnlinePlayers()) {
+            if (IrisCore.getInstance().getPlayerManager().isRegistered(all)) {
+                if (IrisCore.getInstance().getPlayerManager().getTribe(all) != tribe) {
                     targets.add(all);
                 }
             }
@@ -49,12 +47,12 @@ public class SpecialVex implements Listener {
 
             public void run() {
                 count++;
-                if(!vex.isDead()) {
-                    if(count < 30) {
-                        if(vex.getTarget() == null) {
+                if (!vex.isDead()) {
+                    if (count < 30) {
+                        if (vex.getTarget() == null) {
                             for (Entity entity : vex.getNearbyEntities(10, 10, 10)) {
                                 if (entity instanceof Player) {
-                                    if(targets.contains((Player) entity)) {
+                                    if (targets.contains((Player) entity)) {
                                         vex.setTarget((Player) entity);
                                         break;
                                     }
@@ -62,8 +60,8 @@ public class SpecialVex implements Listener {
                                 }
                             }
                         } else {
-                            LivingEntity target = (LivingEntity) vex.getTarget();
-                            if(target.isDead()) {
+                            LivingEntity target = vex.getTarget();
+                            if (target.isDead()) {
                                 vex.setTarget(null);
                             }
                         }
@@ -80,9 +78,9 @@ public class SpecialVex implements Listener {
 
     @EventHandler
     public void onTarget(EntityTargetEvent e) {
-        if(e.getTarget() instanceof Player) {
-            if(e.getEntity() instanceof Vex) {
-                if(e.getEntity().getCustomName().equals(IrisCore.getInstance().getPlayerManager().getTribe((Player) e.getTarget()).toString())) {
+        if (e.getTarget() instanceof Player) {
+            if (e.getEntity() instanceof Vex) {
+                if (e.getEntity().getCustomName().equals(IrisCore.getInstance().getPlayerManager().getTribe((Player) e.getTarget()).toString())) {
                     e.setCancelled(true);
                 }
             }

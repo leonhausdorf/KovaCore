@@ -61,7 +61,7 @@ public class LocationUtil {
             double z = radius * Math.sin(counter);
 
             locs.add(new Location(bottom.getWorld(), bottom.getX() + x, bottom.getY() + y, bottom.getZ() + z));
-            counter++;
+            counter += 0.05;
         }
         return locs;
     }

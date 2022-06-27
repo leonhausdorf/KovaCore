@@ -8,7 +8,6 @@ import de.zevyx.iriscore.config.WorldConfig;
 import de.zevyx.iriscore.entities.SpecialVex;
 import de.zevyx.iriscore.listener.*;
 import de.zevyx.iriscore.manager.*;
-import de.zevyx.iriscore.utils.Backpack;
 import de.zevyx.iriscore.utils.CustomEnchant;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -22,17 +21,30 @@ public class IrisCore extends JavaPlugin {
     private MySQLConfig mySQLConfig;
     private WorldConfig worldConfig;
 
+    @Getter
     private InventoryManager inventoryManager;
+    @Getter
     private PlayerManager playerManager;
+    @Getter
     private TribeManager tribeManager;
+    @Getter
     private EntityManager entityManager;
+    @Getter
     private BackpackManager backpackManager;
+    @Getter
     private CraftingManager craftingManager;
+    @Getter
     private WorldManager worldManager;
     @Getter
     private CooldownManager cooldownManager;
+    @Getter
+    private ScoreboardManager scoreboardManager;
 
     private IrisAPI irisAPI;
+
+    public static IrisCore getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
@@ -51,6 +63,7 @@ public class IrisCore extends JavaPlugin {
         backpackManager = new BackpackManager();
         craftingManager = new CraftingManager();
         worldManager = new WorldManager();
+        scoreboardManager = new ScoreboardManager();
 
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new SpecialVex(), this);
@@ -72,6 +85,7 @@ public class IrisCore extends JavaPlugin {
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("invsee").setExecutor(new InvseeCommand());
         getCommand("enderchest").setExecutor(new EnderchestCommand());
+        getCommand("addenchantment").setExecutor(new AddEnchantingCommand());
 
         messageConfig.init();
         mySQLConfig.init();
@@ -87,10 +101,6 @@ public class IrisCore extends JavaPlugin {
         backpackManager.save();
     }
 
-    public static IrisCore getInstance() {
-        return instance;
-    }
-
     public MessageConfig getMessageConfig() {
         return messageConfig;
     }
@@ -101,34 +111,6 @@ public class IrisCore extends JavaPlugin {
 
     public WorldConfig getWorldConfig() {
         return worldConfig;
-    }
-
-    public InventoryManager getInventoryManager() {
-        return inventoryManager;
-    }
-
-    public PlayerManager getPlayerManager() {
-        return playerManager;
-    }
-
-    public TribeManager getTribeManager() {
-        return tribeManager;
-    }
-
-    public BackpackManager getBackpackManager() {
-        return backpackManager;
-    }
-
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
-
-    public CraftingManager getCraftingManager() {
-        return craftingManager;
-    }
-
-    public WorldManager getWorldManager() {
-        return worldManager;
     }
 
     public IrisAPI getAPI() {

@@ -1,6 +1,5 @@
 package de.zevyx.iriscore.api;
 
-import net.minecraft.world.item.Items;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -15,6 +14,9 @@ public class InventoryBuilder {
     private ItemStack fill;
     private Inventory inventory;
 
+    public static ItemStack getClearMaterial(Material material) {
+        return new ItemBuilderAPI(material).setName("§8").build();
+    }
 
     public Inventory build() {
         if (name == null || lines == 0) {
@@ -87,9 +89,5 @@ public class InventoryBuilder {
             slot += 9;
         }
         return this;
-    }
-
-    public static ItemStack getClearMaterial(Material material) {
-        return new ItemBuilderAPI(material).setName("§8").build();
     }
 }

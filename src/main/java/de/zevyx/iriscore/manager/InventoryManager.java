@@ -26,9 +26,9 @@ public class InventoryManager {
                 .addItem(28, new ItemStack(Material.SKELETON_SKULL)).addItem(29, new ItemStack(Material.SKELETON_SKULL)).addItem(30, new ItemStack(Material.SKELETON_SKULL)).addItem(31, new ItemStack(Material.SKELETON_SKULL)).addItem(32, new ItemStack(Material.SKELETON_SKULL)).addItem(33, new ItemStack(Material.SKELETON_SKULL)).addItem(34, new ItemStack(Material.SKELETON_SKULL))
                 .addItem(37, new ItemStack(Material.SKELETON_SKULL)).addItem(38, new ItemStack(Material.SKELETON_SKULL)).addItem(39, new ItemStack(Material.SKELETON_SKULL)).addItem(40, new ItemStack(Material.SKELETON_SKULL)).addItem(41, new ItemStack(Material.SKELETON_SKULL)).addItem(42, new ItemStack(Material.SKELETON_SKULL)).addItem(43, new ItemStack(Material.SKELETON_SKULL))
                 .animate();
-   }
+    }
 
-   public void openTribeInventory(Player p) {
+    public void openTribeInventory(Player p) {
         Inventory inv = Bukkit.createInventory(null, 9 * 5, "§8Tribes");
         ItemStack fill = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
 
@@ -42,7 +42,7 @@ public class InventoryManager {
                 .addItem(32, new ItemBuilderAPI(Material.POTION).setName("§6Maqas").build())
                 .addItem(34, new ItemBuilderAPI(Material.TOTEM_OF_UNDYING).setName("§5Bedvasis Mirtis").build())
                 .animate();
-   }
+    }
 
     public void openSingleTribeInventory(Player p, Integer tribe) {
         Inventory inv = Bukkit.createInventory(null, 9 * 6, IrisCore.getInstance().getTribeManager().getTribeColor(tribe) + " " + IrisCore.getInstance().getTribeManager().getTribeName(tribe));
@@ -74,23 +74,24 @@ public class InventoryManager {
         return Bukkit.getOfflinePlayer(UUID.fromString(uuid)).isOnline() ? "§aOnline" : "§cOffline";
     }
 
-   public void openAdminInventory(Player p) {
+    public void openAdminInventory(Player p) {
         Inventory inv = Bukkit.createInventory(null, 9 * 3, "§8Admin");
         ItemStack fill = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
 
         new InventoryAnimationAPI(inv, p, fill)
                 .addItem(10, new ItemBuilderAPI(Material.CAMPFIRE).setName("§6Tribes").build())
                 .animate();
-   }
+    }
 
-   public void test(Player p) {
+    public void test(Player p) {
         Inventory inv = Bukkit.createInventory(null, 9 * 3, "TEST");
         ItemStack fill = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
 
         new InventoryAnimationAPI(inv, p, fill)
                 .addItem(10, new ItemBuilderAPI(Material.CAMPFIRE).setName("§6Tribes").build())
                 .animate();
-   }
+    }
+
     public void openBackpackShop(Player p) {
         Inventory inv = Bukkit.createInventory(null, 27, "Backpacks");
         ItemStack fill = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
@@ -100,15 +101,15 @@ public class InventoryManager {
         Integer level = IrisCore.getInstance().getPlayerManager().getBackpackLevel(p.getUniqueId().toString());
         Bukkit.broadcastMessage(level.toString());
 
-        if(level == 1)
+        if (level == 1)
             upgrade = new ItemBuilderAPI(Material.LEATHER).setName("§8» §aUpgrade zu Level 2").build();
-        else if(level == 2)
+        else if (level == 2)
             upgrade = new ItemBuilderAPI(Material.IRON_INGOT).setName("§8» §aUpgrade zu Level 3").build();
-        else if(level == 3)
+        else if (level == 3)
             upgrade = new ItemBuilderAPI(Material.GOLD_INGOT).setName("§8» §aUpgrade zu Level 4").build();
-        else if(level == 4)
+        else if (level == 4)
             upgrade = new ItemBuilderAPI(Material.DIAMOND).setName("§8» §aUpgrade zu Level 5").build();
-        else if(level == 5)
+        else if (level == 5)
             upgrade = new ItemBuilderAPI(Material.EMERALD).setName("§8» §aUpgrade zu Level 6").build();
 
         new InventoryAnimationAPI(inv, p, fill)

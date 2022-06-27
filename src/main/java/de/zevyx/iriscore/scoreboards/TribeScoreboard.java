@@ -4,7 +4,6 @@ import de.zevyx.iriscore.IrisCore;
 import de.zevyx.iriscore.api.IrisAPI;
 import de.zevyx.iriscore.api.ScoreboardBuilder;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class TribeScoreboard extends ScoreboardBuilder {
 
@@ -33,17 +32,15 @@ public class TribeScoreboard extends ScoreboardBuilder {
 
     }
 
+    public void setScores() {
+        Integer tribeID = IrisCore.getInstance().getPlayerManager().getTribe(player);
+
+        setScore("  §8» " + IrisCore.getInstance().getTribeManager().getTribeColor(tribeID) + IrisCore.getInstance().getTribeManager().getTribeName(tribeID), 5);
+        setScore("  §8» §e" + IrisAPI.getInstance().getDukatenAPI().getDukaten(player), 2);
+    }
+
     private void run() {
-        new BukkitRunnable() {
 
-                public void run() {
-                    Integer tribeID = IrisCore.getInstance().getPlayerManager().getTribe(player);
-
-                    setScore("  §8» " + IrisCore.getInstance().getTribeManager().getTribeColor(tribeID) + IrisCore.getInstance().getTribeManager().getTribeName(tribeID), 5);
-                    setScore("  §8» §e" + IrisAPI.getInstance().getDukatenAPI().getDukaten(player), 2);
-                }
-
-            }.runTaskTimer(IrisCore.getInstance(), 20, 20 * 5);
     }
 
 }

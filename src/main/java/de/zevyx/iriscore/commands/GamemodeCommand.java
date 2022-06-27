@@ -76,6 +76,7 @@ public class GamemodeCommand implements CommandExecutor, TabCompleter {
 
         return false;
     }
+
     public List<String> onTabComplete(
             CommandSender sender, Command command, String label, String[] args) {
         if (!sender.isOp() && !(sender instanceof ConsoleCommandSender)) {
@@ -124,9 +125,9 @@ public class GamemodeCommand implements CommandExecutor, TabCompleter {
         } else {
             if (args.length == 2) {
                 List<String> tabComplete = new ArrayList<String>();
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        tabComplete.add(player.getDisplayName());
-                    }
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    tabComplete.add(player.getDisplayName());
+                }
                 return tabComplete;
             }
             return null;

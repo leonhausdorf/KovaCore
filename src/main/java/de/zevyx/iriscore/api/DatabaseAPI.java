@@ -19,7 +19,7 @@ public class DatabaseAPI {
     }
 
     public void connect() {
-        if(!isConnected()) {
+        if (!isConnected()) {
             try {
                 connection = DriverManager.getConnection("jdbc:mysql://" + IrisCore.getInstance().getMySQLConfig().getHost() + ":" + IrisCore.getInstance().getMySQLConfig().getPort() + "/" + IrisCore.getInstance().getMySQLConfig().getDatabase(), IrisCore.getInstance().getMySQLConfig().getUsername(), IrisCore.getInstance().getMySQLConfig().getPassword());
             } catch (SQLException e) {
@@ -29,7 +29,7 @@ public class DatabaseAPI {
     }
 
     public void disconnect() {
-        if(isConnected()) {
+        if (isConnected()) {
             try {
                 connection.close();
             } catch (SQLException e) {

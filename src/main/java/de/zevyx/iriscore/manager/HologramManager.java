@@ -31,11 +31,11 @@ public class HologramManager implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
-        if(e.getBlock().getType() == Material.COBBLESTONE) {
+        if (e.getBlock().getType() == Material.COBBLESTONE) {
             createIndicator(e.getBlock().getLocation(), "§e+1 Dukat", 40);
             IrisAPI.getInstance().getDukatenAPI().addDukaten(e.getPlayer(), 1);
         }
     }
-    
+
 
 }

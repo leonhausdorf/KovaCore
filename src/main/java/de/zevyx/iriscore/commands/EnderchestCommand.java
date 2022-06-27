@@ -13,7 +13,9 @@ public class EnderchestCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (p.hasPermission("iris.invsee")) {
-                if (args.length == 1) {
+                if(args.length == 0){
+                    p.openInventory(p.getEnderChest());
+                } else if (args.length == 1) {
                     Player target = Bukkit.getPlayer(args[0]);
                     if (target == null) {
                         p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§cSpieler " + args[1] + " not found!");
