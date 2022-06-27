@@ -2,7 +2,6 @@ package de.zevyx.iriscore.listener;
 
 import de.zevyx.iriscore.IrisCore;
 import de.zevyx.iriscore.tribes.Tribes;
-import de.zevyx.iriscore.tribes.akarier.Akarier;
 import de.zevyx.iriscore.utils.CooldownType;
 import de.zevyx.iriscore.utils.Util;
 import org.bukkit.Material;
@@ -35,7 +34,7 @@ public class DamageListener implements Listener {
 
                 if (IrisCore.getInstance().getPlayerManager().getTribe(damager) == 5) {
                     IrisCore.getInstance().getCooldownManager().addCooldown(damager.getUniqueId(), CooldownType.AKARIER_INVISIBILITY);
-                    if(Tribes.getAkarier().getInvisibilityManager().getInvisible().contains(damager) && damager.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
+                    if (Tribes.getAkarier().getInvisibilityManager().getInvisible().contains(damager) && damager.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
                         damager.removePotionEffect(PotionEffectType.INVISIBILITY);
                         Tribes.getAkarier().getInvisibilityManager().getInvisible().remove(damager);
                     }

@@ -7,8 +7,8 @@ import java.io.File;
 
 public class MessageConfig {
 
-    private File file;
-    private YamlConfiguration config;
+    private final File file;
+    private final YamlConfiguration config;
 
     public MessageConfig() {
         this.file = new File("plugins/IrisCore/messages.yml");
@@ -48,7 +48,6 @@ public class MessageConfig {
     public String getPrefix() {
         return getMessage("prefix");
     }
-
 
 
 }

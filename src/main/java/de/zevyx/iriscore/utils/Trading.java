@@ -10,6 +10,14 @@ import org.bukkit.inventory.Inventory;
 
 public class Trading {
 
+    @Getter
+    private final Player player;
+    @Getter
+    private final Player target;
+    @Getter
+    private final Inventory playerInventory;
+    @Getter
+    private final Inventory targetInventory;
     public Trading(Player player, Player target) {
         this.player = player;
         this.target = target;
@@ -38,15 +46,6 @@ public class Trading {
                 .item(41, InventoryBuilder.getClearMaterial(Material.YELLOW_STAINED_GLASS_PANE))
                 .build();
     }
-
-    @Getter
-    private final Player player;
-    @Getter
-    private final Player target;
-    @Getter
-    private final Inventory playerInventory;
-    @Getter
-    private final Inventory targetInventory;
 
 
 }

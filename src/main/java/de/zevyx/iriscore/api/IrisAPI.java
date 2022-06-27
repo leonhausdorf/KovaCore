@@ -4,8 +4,8 @@ public class IrisAPI {
 
     private static IrisAPI instance;
 
-    private DatabaseAPI databaseAPI;
-    private DukatenAPI dukatenAPI;
+    private final DatabaseAPI databaseAPI;
+    private final DukatenAPI dukatenAPI;
 
     public IrisAPI() {
         instance = this;

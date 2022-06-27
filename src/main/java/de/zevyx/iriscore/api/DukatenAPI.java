@@ -1,7 +1,6 @@
 package de.zevyx.iriscore.api;
 
 import de.zevyx.iriscore.IrisCore;
-import de.zevyx.iriscore.scoreboards.TribeScoreboard;
 import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
@@ -33,7 +32,7 @@ public class DukatenAPI {
             ps.setString(1, p.getUniqueId().toString());
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return rs.getInt("dukaten");
             }
         } catch (SQLException e) {

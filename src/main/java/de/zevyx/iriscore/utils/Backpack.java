@@ -1,6 +1,5 @@
 package de.zevyx.iriscore.utils;
 
-import net.minecraft.world.item.Items;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;

@@ -4,9 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.block.Skull;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
@@ -14,12 +12,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 public class ItemBuilderAPI {
 
-    private ItemStack is;
+    private final ItemStack is;
 
     public ItemBuilderAPI(Material m) {
         is = new ItemStack(m);
@@ -41,12 +41,6 @@ public class ItemBuilderAPI {
         return this;
     }
 
-    public ItemBuilderAPI setLore(List<String> lore) {
-        ItemMeta im = is.getItemMeta();
-        im.setLore(lore);
-        is.setItemMeta(im);
-        return this;
-    }
 
     public ItemBuilderAPI addDamage(double damage) {
         ItemMeta im = is.getItemMeta();
@@ -57,7 +51,7 @@ public class ItemBuilderAPI {
 
     public ItemBuilderAPI removeDurability(double amount) {
         short minus = (short) amount;
-        if(is.getDurability() + minus > is.getType().getMaxDurability()) {
+        if (is.getDurability() + minus > is.getType().getMaxDurability()) {
             is.setAmount(0);
         } else {
             is.setDurability((short) (is.getDurability() + minus));
@@ -89,10 +83,32 @@ public class ItemBuilderAPI {
         is.setItemMeta(im);
         return this;
     }
+
     public ItemBuilderAPI setSkullOwner(Player player) {
         SkullMeta im = (SkullMeta) is.getItemMeta();
         im.setOwningPlayer(player);
         is.setItemMeta(im);
+        return this;
+    }
+
+    public ItemBuilderAPI setLore(List<String> lore) {
+        ItemMeta itemMeta = is.getItemMeta();
+        itemMeta.setLore(lore);
+        is.setItemMeta(itemMeta);
+        return this;
+    }
+
+    public ItemBuilderAPI setLore(String lore) {
+        ItemMeta itemMeta = is.getItemMeta();
+        itemMeta.setLore(Collections.singletonList(lore));
+        is.setItemMeta(itemMeta);
+        return this;
+    }
+
+    public ItemBuilderAPI setLore(String... lore) {
+        ItemMeta itemMeta = is.getItemMeta();
+        itemMeta.setLore(Arrays.asList(lore));
+        is.setItemMeta(itemMeta);
         return this;
     }
 }

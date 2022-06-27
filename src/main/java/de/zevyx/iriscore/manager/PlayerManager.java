@@ -40,7 +40,7 @@ public class PlayerManager {
             ps.setString(1, p.getUniqueId().toString());
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return rs.getInt("tribeid");
             }
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class PlayerManager {
             ResultSet rs = ps.executeQuery();
 
             ArrayList<String> players = new ArrayList<>();
-            while(rs.next()) {
+            while (rs.next()) {
                 players.add(rs.getString("uuid"));
             }
             return players;
@@ -82,7 +82,7 @@ public class PlayerManager {
             ps.setString(1, uuid);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return rs.getInt("backpacklevel");
             }
         } catch (SQLException e) {
@@ -108,7 +108,7 @@ public class PlayerManager {
             ps.setString(1, uuid);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return rs.getString("backpack");
             }
         } catch (SQLException e) {
@@ -134,7 +134,7 @@ public class PlayerManager {
             ps.setString(1, uuid);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return rs.getInt("kills");
             }
         } catch (SQLException e) {
@@ -149,7 +149,7 @@ public class PlayerManager {
             ps.setString(1, uuid);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return rs.getInt("deaths");
             }
         } catch (SQLException e) {
@@ -159,7 +159,7 @@ public class PlayerManager {
     }
 
     public Integer getKD(String p) {
-        if(getKills(p) != 0 && getDeaths(p) != 0) {
+        if (getKills(p) != 0 && getDeaths(p) != 0) {
             return getKills(p) / getDeaths(p);
         }
         return 1;

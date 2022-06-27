@@ -13,10 +13,10 @@ public class WorldTabCompletion implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
-        if(command.getName().equalsIgnoreCase("world")) {
+        if (command.getName().equalsIgnoreCase("world")) {
             Player p = (Player) commandSender;
-            if(p.hasPermission("iris.world")) {
-                if(args.length == 1) {
+            if (p.hasPermission("iris.world")) {
+                if (args.length == 1) {
                     List<String> arguments = new ArrayList<>();
                     arguments.add("list");
                     arguments.add("import");
@@ -25,17 +25,17 @@ public class WorldTabCompletion implements TabCompleter {
                     return arguments;
                 }
 
-                if(args[0].equalsIgnoreCase("import")) {
+                if (args[0].equalsIgnoreCase("import")) {
                     List<String> arguments = new ArrayList<>();
                     return arguments;
                 }
 
-                if(args[0].equalsIgnoreCase("remove")) {
+                if (args[0].equalsIgnoreCase("remove")) {
                     List<String> arguments = new ArrayList<>(IrisCore.getInstance().getWorldConfig().getWorlds());
                     return arguments;
                 }
 
-                if(args[0].equalsIgnoreCase("tp")) {
+                if (args[0].equalsIgnoreCase("tp")) {
                     List<String> arguments = new ArrayList<>(IrisCore.getInstance().getWorldConfig().getWorlds());
                     return arguments;
                 }

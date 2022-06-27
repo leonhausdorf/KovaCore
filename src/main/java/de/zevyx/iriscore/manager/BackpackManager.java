@@ -4,7 +4,10 @@ import de.zevyx.iriscore.IrisCore;
 import de.zevyx.iriscore.utils.Backpack;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class BackpackManager {
 
@@ -18,7 +21,7 @@ public class BackpackManager {
 
     public Backpack getBackpack(UUID uuid) {
 
-        if(map.containsKey(uuid)) {
+        if (map.containsKey(uuid)) {
             return map.get(uuid);
         }
 
@@ -38,7 +41,7 @@ public class BackpackManager {
 
         uuids.forEach(s -> {
             UUID uuid = UUID.fromString(s);
-            if(IrisCore.getInstance().getPlayerManager().getBackpackContents(s) != null) {
+            if (IrisCore.getInstance().getPlayerManager().getBackpackContents(s) != null) {
                 String base64 = IrisCore.getInstance().getPlayerManager().getBackpackContents(s);
 
                 try {

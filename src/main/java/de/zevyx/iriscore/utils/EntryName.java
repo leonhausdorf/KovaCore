@@ -16,7 +16,7 @@ public enum EntryName {
     private final int entry;
     private final String entryName;
 
-    private EntryName(int entry, String entryName) {
+    EntryName(int entry, String entryName) {
         this.entry = entry;
         this.entryName = entryName;
     }

@@ -3,7 +3,7 @@ package de.zevyx.iriscore.tribes.akarier;
 public class Akarier {
 
 
-    private InvisibilityManager invisibilityManager;
+    private final InvisibilityManager invisibilityManager;
 
     public Akarier() {
         invisibilityManager = new InvisibilityManager();

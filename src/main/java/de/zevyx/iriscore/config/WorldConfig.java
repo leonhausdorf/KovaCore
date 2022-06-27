@@ -9,8 +9,8 @@ import java.util.List;
 
 public class WorldConfig {
 
-    private File file;
-    private YamlConfiguration config;
+    private final File file;
+    private final YamlConfiguration config;
 
     public WorldConfig() {
         this.file = new File("plugins/IrisCore/worlds.yml");

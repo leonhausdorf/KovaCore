@@ -3,8 +3,6 @@ package de.zevyx.iriscore.entities;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 
-import java.util.UUID;
-
 public class ShopNPC {
 
     public static void spawnBackpackShop(Player player) {

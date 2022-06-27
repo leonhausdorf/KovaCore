@@ -4,7 +4,6 @@ import de.zevyx.iriscore.IrisCore;
 import de.zevyx.iriscore.utils.CooldownType;
 import de.zevyx.iriscore.utils.LocationUtil;
 import de.zevyx.iriscore.utils.Trading;
-import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;

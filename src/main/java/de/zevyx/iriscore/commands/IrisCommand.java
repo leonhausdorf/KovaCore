@@ -13,25 +13,25 @@ public class IrisCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender cs, Command cmd, String label, String[] args) {
-        if(cmd.getName().equalsIgnoreCase("iris")) {
-            if(cs instanceof Player) {
+        if (cmd.getName().equalsIgnoreCase("iris")) {
+            if (cs instanceof Player) {
                 Player p = (Player) cs;
-                if(args.length == 1) {
-                    if(args[0].equalsIgnoreCase("shop")) {
+                if (args.length == 1) {
+                    if (args[0].equalsIgnoreCase("shop")) {
                         IrisCore.getInstance().getInventoryManager().openBackpackShop(p);
                     }
                     if (args[0].equalsIgnoreCase("stats")) {
-                        if(p.hasPermission("kova.stats")) {
+                        if (p.hasPermission("kova.stats")) {
                             IrisCore.getInstance().getInventoryManager().openStatsInventory(p);
                         }
                     }
-                    if(args[0].equalsIgnoreCase("admin")) {
-                        if(p.hasPermission("kova.admin")) {
+                    if (args[0].equalsIgnoreCase("admin")) {
+                        if (p.hasPermission("kova.admin")) {
                             IrisCore.getInstance().getInventoryManager().openAdminInventory(p);
                         }
                     }
-                    if(args[0].equalsIgnoreCase("vex")) {
-                        if(p.hasPermission("kova.vex")) {
+                    if (args[0].equalsIgnoreCase("vex")) {
+                        if (p.hasPermission("kova.vex")) {
                             SpecialVex vex = new SpecialVex();
                             vex.createVex(p);
                             vex.createVex(p);
@@ -40,18 +40,18 @@ public class IrisCommand implements CommandExecutor {
                     }
                 }
 
-                if(args.length == 2) {
-                    if(args[0].equalsIgnoreCase("shop")) {
-                        if(p.hasPermission("kova.shop")) {
-                            if(args[1].equalsIgnoreCase("backpack")) {
+                if (args.length == 2) {
+                    if (args[0].equalsIgnoreCase("shop")) {
+                        if (p.hasPermission("kova.shop")) {
+                            if (args[1].equalsIgnoreCase("backpack")) {
                                 ShopNPC.spawnBackpackShop(p);
                                 p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Du hast den Backpack Shop erfolgreich platziert!");
                             }
                         }
                     }
-                    if(args[0].equalsIgnoreCase("tpworld")) {
-                        if(p.hasPermission("kova.tpworld")) {
-                            if(Bukkit.getWorld(args[1]) != null) {
+                    if (args[0].equalsIgnoreCase("tpworld")) {
+                        if (p.hasPermission("kova.tpworld")) {
+                            if (Bukkit.getWorld(args[1]) != null) {
                                 p.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
                                 p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Du wurdest zur Welt §e" + args[1] + "§7 teleportiert!");
                             } else {
@@ -63,16 +63,16 @@ public class IrisCommand implements CommandExecutor {
                     }
                 }
 
-                if(args.length == 4) {
+                if (args.length == 4) {
 
-                    if(args[0].equalsIgnoreCase("tribe")) {
+                    if (args[0].equalsIgnoreCase("tribe")) {
                         if (args[1].equalsIgnoreCase("register")) {
-                            if(p.hasPermission("iris.tribe")) {
+                            if (p.hasPermission("iris.tribe")) {
                                 Player target = p.getServer().getPlayer(args[2]);
                                 Integer tribe = Integer.parseInt(args[3]);
-                                if(target != null) {
-                                    if(!IrisCore.getInstance().getPlayerManager().isRegistered(target)) {
-                                        if(IrisCore.getInstance().getTribeManager().tribeExists(tribe)) {
+                                if (target != null) {
+                                    if (!IrisCore.getInstance().getPlayerManager().isRegistered(target)) {
+                                        if (IrisCore.getInstance().getTribeManager().tribeExists(tribe)) {
                                             IrisCore.getInstance().getPlayerManager().registerPlayer(target, Integer.parseInt(args[3]));
                                             p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spieler §e" + target.getName() + " §7für den Tribe §e" + IrisCore.getInstance().getTribeManager().getTribeName(tribe) + " §7registriert!");
                                         } else {
@@ -86,13 +86,13 @@ public class IrisCommand implements CommandExecutor {
                                 }
                             }
                         }
-                        if(args[1].equalsIgnoreCase("change")) {
-                            if(p.hasPermission("iris.tribe")) {
+                        if (args[1].equalsIgnoreCase("change")) {
+                            if (p.hasPermission("iris.tribe")) {
                                 Player target = p.getServer().getPlayer(args[2]);
                                 Integer tribe = Integer.parseInt(args[3]);
-                                if(target != null) {
-                                    if(IrisCore.getInstance().getPlayerManager().isRegistered(target)) {
-                                        if(IrisCore.getInstance().getTribeManager().tribeExists(tribe)) {
+                                if (target != null) {
+                                    if (IrisCore.getInstance().getPlayerManager().isRegistered(target)) {
+                                        if (IrisCore.getInstance().getTribeManager().tribeExists(tribe)) {
                                             IrisCore.getInstance().getPlayerManager().setTribe(target, Integer.parseInt(args[3]));
                                             p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast den Spieler §e" + target.getName() + " §7in den Tribe §e" + IrisCore.getInstance().getTribeManager().getTribeName(tribe) + " §7gesetzt!");
                                         } else {
