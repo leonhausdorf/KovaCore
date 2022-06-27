@@ -9,6 +9,7 @@ import de.zevyx.iriscore.entities.SpecialVex;
 import de.zevyx.iriscore.listener.*;
 import de.zevyx.iriscore.manager.*;
 import de.zevyx.iriscore.utils.Backpack;
+import de.zevyx.iriscore.utils.CustomEnchant;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -73,6 +74,8 @@ public class IrisCore extends JavaPlugin {
         worldConfig.init();
 
         getCraftingManager().loadAllRecipes();
+
+        CustomEnchant.register();
     }
 
     @Override

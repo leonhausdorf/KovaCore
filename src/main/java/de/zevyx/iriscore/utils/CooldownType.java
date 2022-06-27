@@ -6,6 +6,8 @@ import org.bukkit.Sound;
 public enum CooldownType {
 
     AKARIER_INVISIBILITY("Invisibility", 60, true, Sound.BLOCK_NOTE_BLOCK_BIT),
+    VEX("Vex", 30, true, Sound.BLOCK_NOTE_BLOCK_BIT),
+
     TEST("TestType", 30, true, Sound.BLOCK_NOTE_BLOCK_BIT),
     TEST2("TestType2", 40, true, Sound.BLOCK_NOTE_BLOCK_BIT),
     TEST3("TestType3", 20, true, Sound.BLOCK_NOTE_BLOCK_BIT),

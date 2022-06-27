@@ -1,6 +1,7 @@
 package de.zevyx.iriscore.entities;
 
 import de.zevyx.iriscore.IrisCore;
+import de.zevyx.iriscore.utils.CooldownType;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -25,11 +26,13 @@ public class SpecialVex implements Listener {
         Integer tribe = IrisCore.getInstance().getPlayerManager().getTribe(p);
         Vex vex = loc.getWorld().spawn(loc.add(0, 2, 0), Vex.class);
         vex.setCustomName(tribe.toString());
-        vex.setCustomNameVisible(true);
+        vex.setCustomNameVisible(false);
         Attributable attributable = (Attributable) vex;
         AttributeInstance attributeInstance = attributable.getAttribute(org.bukkit.attribute.Attribute.GENERIC_MAX_HEALTH);
         attributeInstance.setBaseValue(20);
         vex.setHealth(20);
+
+        IrisCore.getInstance().getCooldownManager().addCooldown(p.getUniqueId(), CooldownType.VEX);
 
         ArrayList<Player> targets = new ArrayList<>();
         for(Player all : Bukkit.getOnlinePlayers()) {
