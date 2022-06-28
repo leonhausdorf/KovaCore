@@ -1,13 +1,14 @@
 package de.zevyx.iriscore.commands;
 
 import de.zevyx.iriscore.IrisCore;
-import de.zevyx.iriscore.entities.ShopNPC;
 import de.zevyx.iriscore.entities.SpecialVex;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class IrisCommand implements CommandExecutor {
 
@@ -44,7 +45,6 @@ public class IrisCommand implements CommandExecutor {
                     if (args[0].equalsIgnoreCase("shop")) {
                         if (p.hasPermission("kova.shop")) {
                             if (args[1].equalsIgnoreCase("backpack")) {
-                                ShopNPC.spawnBackpackShop(p);
                                 p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Du hast den Backpack Shop erfolgreich platziert!");
                             }
                         }
