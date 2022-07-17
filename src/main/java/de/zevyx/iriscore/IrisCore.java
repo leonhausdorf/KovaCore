@@ -1,5 +1,6 @@
 package de.zevyx.iriscore;
 
+import de.zevyx.iriscore.api.DatabaseAPI;
 import de.zevyx.iriscore.api.IrisAPI;
 import de.zevyx.iriscore.commands.*;
 import de.zevyx.iriscore.config.MessageConfig;
@@ -8,6 +9,8 @@ import de.zevyx.iriscore.config.WorldConfig;
 import de.zevyx.iriscore.entities.SpecialVex;
 import de.zevyx.iriscore.listener.*;
 import de.zevyx.iriscore.manager.*;
+import de.zevyx.iriscore.scoreboards.TribePlayerScoreboard;
+import de.zevyx.iriscore.scoreboards.TribeScoreboardListener;
 import de.zevyx.iriscore.tribes.Tribes;
 import de.zevyx.iriscore.utils.CustomEnchant;
 import lombok.Getter;
@@ -41,6 +44,13 @@ public class IrisCore extends JavaPlugin {
     @Getter
     private ScoreboardManager scoreboardManager;
 
+    @Getter
+    private PortalManager portalManager;
+    @Getter
+    private ParticleManager particleManager;
+    @Getter
+    private TablistManager tablistManager;
+
     private IrisAPI irisAPI;
 
     public static IrisCore getInstance() {
@@ -53,7 +63,6 @@ public class IrisCore extends JavaPlugin {
         irisAPI = new IrisAPI();
         mySQLConfig = new MySQLConfig();
 
-        getAPI().getDatabaseAPI().connect();
         messageConfig = new MessageConfig();
         worldConfig = new WorldConfig();
         cooldownManager = new CooldownManager();
@@ -64,7 +73,11 @@ public class IrisCore extends JavaPlugin {
         backpackManager = new BackpackManager();
         craftingManager = new CraftingManager();
         worldManager = new WorldManager();
-        scoreboardManager = new ScoreboardManager();
+        // scoreboardManager = new ScoreboardManager();
+        portalManager = new PortalManager();
+        particleManager = new ParticleManager();
+        tablistManager = new TablistManager();
+
 
         Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
         Bukkit.getPluginManager().registerEvents(new SpecialVex(), this);
@@ -90,16 +103,34 @@ public class IrisCore extends JavaPlugin {
         getCommand("invsee").setExecutor(new InvseeCommand());
         getCommand("enderchest").setExecutor(new EnderchestCommand());
         getCommand("addenchantment").setExecutor(new AddEnchantingCommand());
+        getCommand("spawn").setExecutor(new SpawnCommand());
 
         messageConfig.init();
         mySQLConfig.init();
         worldConfig.init();
+        getPortalManager().init();
+
+        getParticleManager().start();
 
         getCraftingManager().loadAllRecipes();
         Tribes.getKalnas().getCraftingManager().registerCrafting();
         Tribes.getAkarier().getCraftingManager().registerCrafting();
 
         CustomEnchant.register();
+
+        getWorldManager().loadAllWorlds();
+        getBackpackManager().load();
+
+        TribePlayerScoreboard tribeScoreboard = new TribePlayerScoreboard();
+        tribeScoreboard.setDefaultSidebarScore(6, " ");
+        tribeScoreboard.setDefaultSidebarScore(5, "§7Dein Tribe       ");
+        tribeScoreboard.setDefaultSidebarScore(4, "  §8» §7Kein Tribe");
+        tribeScoreboard.setDefaultSidebarScore(3, " ");
+        tribeScoreboard.setDefaultSidebarScore(2, "§7Dukaten       ");
+        tribeScoreboard.setDefaultSidebarScore(1, "  §8» §e0");
+        tribeScoreboard.setDefaultSidebarScore(0, " ");
+
+        Bukkit.getPluginManager().registerEvents(new TribeScoreboardListener(tribeScoreboard), this);
     }
 
     @Override

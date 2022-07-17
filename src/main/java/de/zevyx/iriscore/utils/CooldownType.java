@@ -9,6 +9,9 @@ public enum CooldownType {
     DOUBLEJUMP("Double Jump", 10, true, Sound.UI_TOAST_IN),
 
     VEX("Vex", 29, true, Sound.UI_TOAST_IN),
+    COMBAT("Combat", 20, true, Sound.UI_TOAST_IN),
+
+    TELEPORTATION("Teleportation", 5, true, Sound.ENTITY_ENDERMAN_TELEPORT),
 
     TEST("TestType", 30, true, Sound.UI_TOAST_IN),
     TEST2("TestType2", 40, true, Sound.UI_TOAST_IN),

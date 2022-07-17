@@ -1,7 +1,9 @@
 package de.zevyx.iriscore.api;
 
 import de.zevyx.iriscore.IrisCore;
+import de.zevyx.iriscore.scoreboards.TribePlayerScoreboard;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,31 +16,31 @@ public class DukatenAPI {
     }
 
     public void setDukaten(Player p, int dukaten) {
-        try {
-            PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("UPDATE `players` SET `dukaten` = ? WHERE `uuid` = ?");
-            ps.setInt(1, dukaten);
-            ps.setString(2, p.getUniqueId().toString());
+        new BukkitRunnable() {
+            public void run() {
+                DatabaseAPI.execute(conn -> {
+                    PreparedStatement ps = conn.prepareStatement("UPDATE `players` SET `dukaten` = ? WHERE `uuid` = ?");
+                    ps.setInt(1, dukaten);
+                    ps.setString(2, p.getUniqueId().toString());
 
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+                    ps.executeUpdate();
+                    return null;
+                });
+            }
+        }.runTaskAsynchronously(IrisCore.getInstance());
     }
 
     public Integer getDukaten(Player p) {
-        try {
-            PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("SELECT `dukaten` FROM `players` WHERE `uuid` = ?");
+        return DatabaseAPI.execute(conn -> {
+            PreparedStatement ps = conn.prepareStatement("SELECT `dukaten` FROM `players` WHERE `uuid` = ?");
             ps.setString(1, p.getUniqueId().toString());
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 return rs.getInt("dukaten");
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return 0;
+            return null;
+        });
     }
 
     public void addDukaten(Player p, int dukaten) {

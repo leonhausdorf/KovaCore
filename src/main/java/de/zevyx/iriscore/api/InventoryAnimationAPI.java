@@ -36,7 +36,7 @@ public class InventoryAnimationAPI {
         Integer maxSlot = items.size();
 
 
-        for (int i = 0; i < inventorySize; i++) {
+        for (int i = 0; i <= inventorySize; i++) {
             inventory.setItem(i, idleItem);
         }
 

@@ -17,6 +17,12 @@ public abstract class ScoreboardBuilder {
     @Getter
     protected final Player player;
 
+    /**
+     * Have big performance issues when using this constructor.
+     *
+     * @deprecated use {@link de.zevyx.iriscore.scoreboards.TribeScoreboard} instead.
+     */
+    @Deprecated
     public ScoreboardBuilder(Player player, String displayName) {
         this.player = player;
 
@@ -34,8 +40,20 @@ public abstract class ScoreboardBuilder {
         createScoreboard();
     }
 
+    /**
+     * Big performance issues when using this constructor.
+     *
+     * @deprecated use {@link de.zevyx.iriscore.scoreboards.TribeScoreboard} instead.
+     */
+    @Deprecated
     public abstract void createScoreboard();
 
+    /**
+     * Big performance issues when using this constructor.
+     *
+     * @deprecated use {@link de.zevyx.iriscore.scoreboards.TribeScoreboard} instead.
+     */
+    @Deprecated
     public abstract void update();
 
     public void setDisplayName(String displayName) {

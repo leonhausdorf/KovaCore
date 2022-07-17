@@ -3,51 +3,73 @@ package de.zevyx.iriscore.scoreboards;
 import de.zevyx.iriscore.IrisCore;
 import de.zevyx.iriscore.api.IrisAPI;
 import de.zevyx.iriscore.api.ScoreboardBuilder;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
-public class TribeScoreboard extends ScoreboardBuilder {
+public class TribeScoreboard {
 
-    public TribeScoreboard(Player player) {
-        super(player, "  §8» §6§lIRIS §r§8«  ");
+    private final Scoreboard scoreboard;
+    private final Objective objective;
 
-        run();
+    public TribeScoreboard() {
+        this(Bukkit.getScoreboardManager().getMainScoreboard());
     }
 
-    @Override
-    public void createScoreboard() {
-        String tribe;
-        if(IrisCore.getInstance().getPlayerManager().getTribe(player) == 0) {
-            tribe = "§7Kein Tribe";
-        } else {
-            Integer tribeID = IrisCore.getInstance().getPlayerManager().getTribe(player);
-            tribe = IrisCore.getInstance().getTribeManager().getTribeColor(tribeID) + IrisCore.getInstance().getTribeManager().getTribeName(tribeID);
-        }
+    public TribeScoreboard(Scoreboard scoreboard) {
+        this.scoreboard = scoreboard;
 
+        if (this.scoreboard.getObjective("sidebar") != null)
+            this.scoreboard.getObjective("sidebar").unregister();
 
-        setScore(" ", 7);
-        setScore("§7Dein Tribe       ", 6);
-        setScore("  §8» " + tribe, 5);
-        setScore("  ", 4);
-        setScore("§7Dukaten", 3);
-        setScore("  §8» §e" + IrisAPI.getInstance().getDukatenAPI().getDukaten(player), 2);
-        setScore("     ", 1);
-        setScore("     ", 0);
+        objective = this.scoreboard.registerNewObjective("sidebar", "dummy", "  §8» §6§lIRIS §r§8«  ");
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
     }
 
-    @Override
-    public void update() {
+   public void setSidebarScore(int slot, String content) {
+       Team team = getOrCreateTeam("sidebar" + slot);
+       String entry = getEntry(slot);
 
+       if (content == null) {
+           scoreboard.resetScores(entry);
+           return;
+       }
+       team.setPrefix(content);
+       team.addEntry(entry);
+
+       objective.getScore(entry).setScore(slot);
+   }
+
+   public void addPlayer(Player player, String teamName, String prefix, String suffix, ChatColor color) {
+       Team team = getOrCreateTeam(teamName);
+       team.setPrefix(prefix);
+       team.setSuffix(suffix);
+       team.setColor(color);
+       team.addEntry(player.getName());
+   }
+
+    public void removePlayer(Player player) {
+       Team team = scoreboard.getEntryTeam(player.getName());
+       if (team != null) team.removeEntry(player.getName());
     }
 
-    public void setScores() {
-        Integer tribeID = IrisCore.getInstance().getPlayerManager().getTribe(player);
 
-        setScore("  §8» " + IrisCore.getInstance().getTribeManager().getTribeColor(tribeID) + IrisCore.getInstance().getTribeManager().getTribeName(tribeID), 5);
-        setScore("  §8» §e" + IrisAPI.getInstance().getDukatenAPI().getDukaten(player), 2);
-    }
 
-    private void run() {
+   private Team getOrCreateTeam(String name) {
+       Team team = scoreboard.getTeam(name);
+       if (team == null) {
+           team = scoreboard.registerNewTeam(name);
+           team.setPrefix(name);
+       }
+       return team;
+   }
 
-    }
+   private String getEntry(int slot) {
+        return ChatColor.values()[slot].toString() + ChatColor.values()[slot + 1];
+   }
 
 }

@@ -29,8 +29,10 @@ public class DamageListener implements Listener {
     public void onDamage(EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Player) {
             Player damager = (Player) e.getDamager();
+            IrisCore.getInstance().getCooldownManager().addCooldown(damager.getUniqueId(), CooldownType.COMBAT);
             if (e.getEntity() instanceof Player) {
                 Player t = (Player) e.getEntity();
+                IrisCore.getInstance().getCooldownManager().addCooldown(t.getUniqueId(), CooldownType.COMBAT);
 
                 if (IrisCore.getInstance().getPlayerManager().getTribe(damager) == 5) {
                     IrisCore.getInstance().getCooldownManager().addCooldown(damager.getUniqueId(), CooldownType.AKARIER_INVISIBILITY);

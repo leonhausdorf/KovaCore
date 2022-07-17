@@ -14,7 +14,7 @@ public class HealCommand implements CommandExecutor {
         player.setSaturation(20.0f);
         player.setFoodLevel(20);
         if (sender != null) {
-            player.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§fDu wurdest von §a" + sender + "§f geheilt!");
+            player.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du wurdest von §e" + sender + "§7 geheilt!");
         }
     }
 
@@ -29,22 +29,22 @@ public class HealCommand implements CommandExecutor {
                         healPlayer(player, sender.getName());
                         ++healed;
                     }
-                    sender.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§fDu hast §a" + healed + "§f Spieler geheilt!");
+                    sender.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast §e" + healed + "§7 Spieler geheilt!");
                 } else if (Bukkit.getPlayer(args[0]) != null) {
                     healPlayer(Bukkit.getPlayer(args[0]), sender.getName());
                     sender.sendMessage(
                             IrisCore.getInstance().getMessageConfig().getPrefix()
-                                    + "§fDu hast §a"
+                                    + "§7Du hast §e"
                                     + Bukkit.getPlayer(args[0]).getName()
-                                    + "§f geheilt!");
+                                    + "§7 geheilt!");
                 }
             } else if (sender instanceof Player && args.length == 0) {
                 healPlayer((Player) sender, "dir");
             } else {
-                sender.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§cBitte benutze /heal <Spieler/@all>");
+                sender.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Bitte benutze /heal <Spieler/@all>");
             }
         } else {
-            sender.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§cDu hast du keine Berechtigungen");
+            sender.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "§7Du hast du keine Berechtigungen");
         }
         return false;
     }

@@ -18,3 +18,4 @@ commands:
     aliases:
       - ec
   addenchantment:
+  spawn:

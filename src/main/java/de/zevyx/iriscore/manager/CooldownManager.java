@@ -72,6 +72,13 @@ public class CooldownManager {
                             if (type.getFinishSound() != null) {
                                 player.playSound(player.getLocation(), type.getFinishSound(), 10, 1);
                             }
+                            if(type == CooldownType.TELEPORTATION) {
+                                if(IrisCore.getInstance().getPortalManager().hasPortalDestinationLocation(IrisCore.getInstance().getPortalManager().getNearestPortalName(player.getLocation()))) {
+                                    player.teleport(IrisCore.getInstance().getPortalManager().getPortalDestinationLocation(IrisCore.getInstance().getPortalManager().getNearestPortalName(player.getLocation())));
+                                } else {
+                                    player.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Dieses Portal führt ins nichts. Es wäre nicht klug hindurch zu gehen.");
+                                }
+                            }
                             continue;
                         }
                     }
@@ -87,6 +94,18 @@ public class CooldownManager {
             playerCooldowns.replace(cooldownType, System.currentTimeMillis() + (cooldownType.getCooldown() * 1000L));
         } else {
             playerCooldowns.put(cooldownType, System.currentTimeMillis() + (cooldownType.getCooldown() * 1000L));
+        }
+        if (cooldowns.containsKey(uuid)) {
+            cooldowns.replace(uuid, playerCooldowns);
+        } else {
+            cooldowns.put(uuid, playerCooldowns);
+        }
+    }
+
+    public void removeCooldown(UUID uuid, CooldownType cooldownType) {
+        HashMap<CooldownType, Long> playerCooldowns = cooldowns.getOrDefault(uuid, new HashMap<CooldownType, Long>());
+        if (playerCooldowns.containsKey(cooldownType)) {
+            playerCooldowns.remove(cooldownType);
         }
         if (cooldowns.containsKey(uuid)) {
             cooldowns.replace(uuid, playerCooldowns);

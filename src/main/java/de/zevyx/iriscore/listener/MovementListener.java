@@ -4,6 +4,7 @@ import de.zevyx.iriscore.IrisCore;
 import de.zevyx.iriscore.tribes.Tribes;
 import de.zevyx.iriscore.utils.CooldownType;
 import de.zevyx.iriscore.utils.CustomEnchant;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,7 +21,11 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.List;
+
 public class MovementListener implements Listener {
+
+    private final List<String> locations = IrisCore.getInstance().getPortalManager().getAllPortalNames();
 
     @EventHandler
     public void onMove(PlayerMoveEvent e) {
@@ -30,6 +35,21 @@ public class MovementListener implements Listener {
             if(player.getInventory().getBoots() != null && player.getInventory().getBoots().hasItemMeta() && player.getInventory().getBoots().getItemMeta().hasEnchant(CustomEnchant.DOUBLEJUMP)) {
                 if(player.getLocation().subtract(0, 1, 0).getBlock().getType() != Material.AIR) {
                     player.setAllowFlight(true);
+                }
+            }
+        }
+
+
+        if(!IrisCore.getInstance().getPortalManager().isPlayerInAnyPortal(player.getLocation()))
+            if(IrisCore.getInstance().getCooldownManager().hasCooldown(player.getUniqueId(), CooldownType.TELEPORTATION))
+                IrisCore.getInstance().getCooldownManager().removeCooldown(player.getUniqueId(), CooldownType.TELEPORTATION);
+
+        for(int i = 0; i < locations.size(); i++) {
+            if(IrisCore.getInstance().getPortalManager().isPlayerInPortal(locations.get(i), player.getLocation())) {
+                if(IrisCore.getInstance().getCooldownManager().hasCooldown(player.getUniqueId(), CooldownType.TELEPORTATION)) {
+                    return;
+                } else {
+                    IrisCore.getInstance().getCooldownManager().addCooldown(player.getUniqueId(), CooldownType.TELEPORTATION);
                 }
             }
         }

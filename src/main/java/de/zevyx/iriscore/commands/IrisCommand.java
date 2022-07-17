@@ -42,6 +42,13 @@ public class IrisCommand implements CommandExecutor {
                 }
 
                 if (args.length == 2) {
+                    if(args[0].equalsIgnoreCase("portaldest")) {
+                        if (p.hasPermission("iris.portal")) {
+                            String name = args[1];
+                            IrisCore.getInstance().getPortalManager().setPortalDestinationLocation(name, p.getLocation());
+                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Du hast die Destination für das Portal §e" + name + " §7gesetzt.");
+                        }
+                    }
                     if (args[0].equalsIgnoreCase("shop")) {
                         if (p.hasPermission("kova.shop")) {
                             if (args[1].equalsIgnoreCase("backpack")) {
@@ -59,6 +66,17 @@ public class IrisCommand implements CommandExecutor {
                             }
                         } else {
                             p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Du hast keine Berechtigung für diesen Befehl!");
+                        }
+                    }
+                }
+
+                if(args.length == 3) {
+                    if(args[0].equalsIgnoreCase("portal")) {
+                        if (p.hasPermission("iris.portal")) {
+                            String name = args[1];
+                            Integer radius = Integer.parseInt(args[2]);
+                            IrisCore.getInstance().getPortalManager().setPortalLocation(name, p.getLocation(), radius);
+                            p.sendMessage(IrisCore.getInstance().getMessageConfig().getPrefix() + "Du hast das Portal §e" + name + "§7 erfolgreich platziert!");
                         }
                     }
                 }

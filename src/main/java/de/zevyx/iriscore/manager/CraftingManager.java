@@ -275,30 +275,35 @@ public class CraftingManager implements Listener {
 
             if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eBackpack §7(§eTier 2§7)")) {
                 String uuid = e.getInventory().getMatrix()[4].getItemMeta().getLore().get(0).replaceAll("§8BackpackID: ", "");
+                IrisCore.getInstance().getBackpackManager().save();
                 IrisCore.getInstance().getBackpackManager().setBackpackLevel(uuid, 2);
                 e.getInventory().setResult(new ItemBuilderAPI(Material.BUNDLE).setName("§8» §eBackpack §7(§eTier 2§7)").setLore("§8BackpackID: " + uuid).build());
             }
 
             if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eBackpack §7(§eTier 3§7)")) {
                 String uuid = e.getInventory().getMatrix()[4].getItemMeta().getLore().get(0).replaceAll("§8BackpackID: ", "");
+                IrisCore.getInstance().getBackpackManager().save();
                 IrisCore.getInstance().getBackpackManager().setBackpackLevel(uuid, 3);
                 e.getInventory().setResult(new ItemBuilderAPI(Material.BUNDLE).setName("§8» §eBackpack §7(§eTier 3§7)").setLore("§8BackpackID: " + uuid).build());
             }
 
             if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eBackpack §7(§eTier 4§7)")) {
                 String uuid = e.getInventory().getMatrix()[4].getItemMeta().getLore().get(0).replaceAll("§8BackpackID: ", "");
+                IrisCore.getInstance().getBackpackManager().save();
                 IrisCore.getInstance().getBackpackManager().setBackpackLevel(uuid, 4);
                 e.getInventory().setResult(new ItemBuilderAPI(Material.BUNDLE).setName("§8» §eBackpack §7(§eTier 4§7)").setLore("§8BackpackID: " + uuid).build());
             }
 
             if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eBackpack §7(§eTier 5§7)")) {
                 String uuid = e.getInventory().getMatrix()[4].getItemMeta().getLore().get(0).replaceAll("§8BackpackID: ", "");
+                IrisCore.getInstance().getBackpackManager().save();
                 IrisCore.getInstance().getBackpackManager().setBackpackLevel(uuid, 5);
                 e.getInventory().setResult(new ItemBuilderAPI(Material.BUNDLE).setName("§8» §eBackpack §7(§eTier 5§7)").setLore("§8BackpackID: " + uuid).build());
             }
 
             if(e.getRecipe().getResult().getItemMeta().getDisplayName().equalsIgnoreCase("§8» §eBackpack §7(§eTier 6§7)")) {
                 String uuid = e.getInventory().getMatrix()[4].getItemMeta().getLore().get(0).replaceAll("§8BackpackID: ", "");
+                IrisCore.getInstance().getBackpackManager().save();
                 IrisCore.getInstance().getBackpackManager().setBackpackLevel(uuid, 6);
                 e.getInventory().setResult(new ItemBuilderAPI(Material.BUNDLE).setName("§8» §eBackpack §7(§eTier 6§7)").setLore("§8BackpackID: " + uuid).build());
             }

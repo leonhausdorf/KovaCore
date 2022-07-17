@@ -1,22 +1,23 @@
 package de.zevyx.iriscore.manager;
 
 import de.zevyx.iriscore.IrisCore;
+import de.zevyx.iriscore.api.DatabaseAPI;
 import de.zevyx.iriscore.utils.Backpack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
 public class BackpackManager {
+
+
 
     private final Map<UUID, Backpack> map;
 
     public BackpackManager() {
         map = new HashMap<>();
-
-        load();
     }
 
     public Backpack getBackpack(UUID uuid) {
@@ -36,7 +37,7 @@ public class BackpackManager {
         map.put(uuid, backpack);
     }
 
-    private void load() {
+    public void load() {
         List<String> uuids = getAllBackpacks();
 
         uuids.forEach(s -> {
@@ -82,97 +83,104 @@ public class BackpackManager {
     }
 
     public List<String> getAllBackpacks() {
-        try {
-            PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("SELECT * FROM `backpacks`");
+        return DatabaseAPI.execute(conn -> {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM `backpacks`");
             ResultSet rs = ps.executeQuery();
+
 
             ArrayList<String> players = new ArrayList<>();
             while (rs.next()) {
                 players.add(rs.getString("id"));
             }
             return players;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        });
     }
 
     public Integer getBackpackLevel(String uuid) {
-        try {
-            PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("SELECT `level` FROM `backpacks` WHERE `id` = ?");
+        return DatabaseAPI.execute(conn -> {
+            PreparedStatement ps = conn.prepareStatement("SELECT `level` FROM `backpacks` WHERE `id` = ?");
             ps.setString(1, uuid);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 return rs.getInt("level");
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
+            return null;
+        });
     }
 
     public void setBackpackLevel(String uuid, Integer level) {
-        try {
-            PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("UPDATE `backpacks` SET `level` = ? WHERE `id` = ?");
-            ps.setInt(1, level);
-            ps.setString(2, uuid);
-            ps.execute();
+        new BukkitRunnable() {
+            public void run() {
+                DatabaseAPI.execute(conn -> {
+                    PreparedStatement ps = conn.prepareStatement("UPDATE `backpacks` SET `level` = ? WHERE `id` = ?");
+                    ps.setInt(1, level);
+                    ps.setString(2, uuid);
+                    ps.execute();
 
-            reloadBackpack(uuid);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+                    reloadBackpack(uuid);
+                    return null;
+                });
+            }
+        }.runTaskAsynchronously(IrisCore.getInstance());
     }
 
     public String getBackpackContents(String uuid) {
-        try {
-            PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("SELECT `contents` FROM `backpacks` WHERE `id` = ?");
+        return DatabaseAPI.execute(conn -> {
+            PreparedStatement ps = conn.prepareStatement("SELECT `contents` FROM `backpacks` WHERE `id` = ?");
             ps.setString(1, uuid);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 return rs.getString("contents");
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
+            return null;
+        });
     }
 
     public void setBackpackContents(String uuid, String data) {
-        try {
-            PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("UPDATE `backpacks` SET `contents` = ? WHERE `id` = ?");
-            ps.setString(1, data);
-            ps.setString(2, uuid);
-            ps.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new BukkitRunnable() {
+            public void run() {
+                DatabaseAPI.execute(conn -> {
+                    PreparedStatement ps = conn.prepareStatement("UPDATE `backpacks` SET `contents` = ? WHERE `id` = ?");
+                    ps.setString(1, data);
+                    ps.setString(2, uuid);
+                    ps.execute();
+                    return null;
+                });
+            }
+        }.runTaskAsynchronously(IrisCore.getInstance());
     }
 
     public boolean backpackExists(String uuid) {
-        try {
-            PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("SELECT * FROM `backpacks` WHERE `id` = ?");
-            ps.setString(1, uuid);
-            ResultSet rs = ps.executeQuery();
+        new BukkitRunnable() {
+            public void run() {
+                DatabaseAPI.execute(conn -> {
+                    PreparedStatement ps = conn.prepareStatement("SELECT * FROM `backpacks` WHERE `id` = ?");
+                    ps.setString(1, uuid);
+                    ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                return true;
+                    if (rs.next()) {
+                        return true;
+                    }
+                    return null;
+                });
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        }.runTaskAsynchronously(IrisCore.getInstance());
         return false;
     }
 
     public void addBackpack(String uuid) {
-        try {
-            PreparedStatement ps = IrisCore.getInstance().getAPI().getDatabaseAPI().getConnection().prepareStatement("INSERT INTO `backpacks` (`id`) VALUES (?)");
-            ps.setString(1, uuid);
-            ps.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        new BukkitRunnable() {
+            public void run() {
+                DatabaseAPI.execute(conn -> {
+                    PreparedStatement ps = conn.prepareStatement("INSERT INTO `backpacks` (`id`) VALUES (?)");
+                    ps.setString(1, uuid);
+                    ps.execute();
+                    return null;
+                });
+            }
+        }.runTaskAsynchronously(IrisCore.getInstance());
     }
 
 }
